@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ARQV30 Enhanced v2.0 - Análise Arqueológica Ultra-Detalhada</title>
+    
+    <!-- Enhanced CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/enhanced_ui.css') }}">
+    
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🧠</text></svg>">
+</head>
+<body>
+    <!-- Enhanced Header -->
+    <header class="enhanced-header">
+        <div class="header-content">
+            <div class="logo-enhanced">
+                <div class="logo-icon">
+                    🧠
+                </div>
+                <div class="logo-text">
+                    <h1>ARQV30 Enhanced</h1>
+                    <div class="version">v2.0 - Análise Arqueológica</div>
+                </div>
+            </div>
+            
+            <div class="header-status">
+                <div style="display: flex; gap: var(--space-4); align-items: center;">
+                    <a href="/forensic" class="btn-secondary-enhanced" style="text-decoration: none; font-size: 0.875rem; padding: var(--space-2) var(--space-4);">
+                        <i class="fas fa-microscope"></i>
+                        Análise Forense
+                    </a>
+                    <a href="/" class="btn-secondary-enhanced" style="text-decoration: none; font-size: 0.875rem; padding: var(--space-2) var(--space-4);">
+                        <i class="fas fa-home"></i>
+                        Início
+                    </a>
+                </div>
+                <div class="status-enhanced status-online" id="systemStatus">
+                    <div class="status-dot"></div>
+                    <span>Sistema Ultra-Robusto</span>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main style="min-height: 100vh; padding: var(--space-8) 0;">
+        <div style="max-width: 1400px; margin: 0 auto; padding: 0 var(--space-6);">
+            
+            <!-- Hero Section -->
+            <section style="text-align: center; margin-bottom: var(--space-16); padding: var(--space-12) 0;">
+                <h1 style="font-size: 3.5rem; font-weight: 900; margin-bottom: var(--space-6); background: linear-gradient(135deg, var(--primary-400), var(--accent-secondary)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">
+                    Análise Arqueológica Ultra-Detalhada
+                </h1>
+                <p style="font-size: 1.25rem; color: var(--text-secondary); margin-bottom: var(--space-8); max-width: 800px; margin-left: auto; margin-right: auto;">
+                    Sistema de agentes psicológicos especializados • Gemini 2.5 Pro • WebSailor • Zero Simulação
+                </p>
+                
+                <div class="grid-enhanced grid-4" style="margin-top: var(--space-12);">
+                    <div class="card-enhanced" style="text-align: center; padding: var(--space-8);">
+                        <div style="font-size: 3rem; margin-bottom: var(--space-4); color: var(--accent-primary);">🔬</div>
+                        <h4 style="font-weight: 700; margin-bottom: var(--space-2);">Arqueólogo Mestre</h4>
+                        <p style="color: var(--text-muted); font-size: 0.875rem;">12 camadas de análise forense</p>
+                    </div>
+                    
+                    <div class="card-enhanced" style="text-align: center; padding: var(--space-8);">
+                        <div style="font-size: 3rem; margin-bottom: var(--space-4); color: var(--accent-secondary);">🧠</div>
+                        <h4 style="font-weight: 700; margin-bottom: var(--space-2);">Drivers Mentais</h4>
+                        <p style="color: var(--text-muted); font-size: 0.875rem;">19 gatilhos psicológicos universais</p>
+                    </div>
+                    
+                    <div class="card-enhanced" style="text-align: center; padding: var(--space-8);">
+                        <div style="font-size: 3rem; margin-bottom: var(--space-4); color: var(--accent-warning);">🎭</div>
+                        <h4 style="font-weight: 700; margin-bottom: var(--space-2);">Provas Visuais</h4>
+                        <p style="color: var(--text-muted); font-size: 0.875rem;">PROVIs que destroem objeções</p>
+                    </div>
+                    
+                    <div class="card-enhanced" style="text-align: center; padding: var(--space-8);">
+                        <div style="font-size: 3rem; margin-bottom: var(--space-4); color: var(--accent-success);">🛡️</div>
+                        <h4 style="font-weight: 700; margin-bottom: var(--space-2);">Anti-Objeção</h4>
+                        <p style="color: var(--text-muted); font-size: 0.875rem;">Sistema psicológico completo</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Enhanced Analysis Form -->
+            <section style="margin-bottom: var(--space-16);">
+                <div class="enhanced-form-container">
+                    <form id="enhancedAnalysisForm">
+                        <!-- Basic Information -->
+                        <div class="form-section">
+                            <div class="section-header">
+                                <div class="section-icon">
+                                    <i class="fas fa-info-circle"></i>
+                                </div>
+                                <div>
+                                    <h3 class="section-title">Informações do Projeto</h3>
+                                    <p class="section-subtitle">Dados básicos para análise arqueológica</p>
+                                </div>
+                            </div>
+                            
+                            <div class="input-group-enhanced">
+                                <label class="input-label-enhanced" for="segmento">Segmento de Mercado *</label>
+                                <input type="text" id="segmento" name="segmento" class="input-enhanced" required 
+                                       placeholder="Ex: Produtos Digitais, Consultoria, E-commerce, Saúde...">
+                            </div>
+                            
+                            <div class="grid-enhanced grid-2">
+                                <div class="input-group-enhanced">
+                                    <label class="input-label-enhanced" for="produto">Produto/Serviço</label>
+                                    <input type="text" id="produto" name="produto" class="input-enhanced"
+                                           placeholder="Nome do seu produto ou serviço">
+                                </div>
+                                
+                                <div class="input-group-enhanced">
+                                    <label class="input-label-enhanced" for="preco">Preço (R$)</label>
+                                    <input type="number" id="preco" name="preco" class="input-enhanced" step="0.01"
+                                           placeholder="997.00">
+                                </div>
+                            </div>
+                            
+                            <div class="input-group-enhanced">
+                                <label class="input-label-enhanced" for="publico">Público-Alvo Detalhado</label>
+                                <textarea id="publico" name="publico" class="input-enhanced textarea-enhanced" rows="4"
+                                          placeholder="Descreva detalhadamente seu público-alvo ideal, incluindo dores, desejos e características psicológicas..."></textarea>
+                            </div>
+                        </div>
+
+                        <!-- Psychological Context -->
+                        <div class="form-section">
+                            <div class="section-header">
+                                <div class="section-icon">
+                                    <i class="fas fa-brain"></i>
+                                </div>
+                                <div>
+                                    <h3 class="section-title">Contexto Psicológico</h3>
+                                    <p class="section-subtitle">Informações para análise visceral profunda</p>
+                                </div>
+                            </div>
+                            
+                            <div class="grid-enhanced grid-2">
+                                <div class="input-group-enhanced">
+                                    <label class="input-label-enhanced" for="objetivo_receita">Objetivo de Receita (R$)</label>
+                                    <input type="number" id="objetivo_receita" name="objetivo_receita" class="input-enhanced" step="0.01"
+                                           placeholder="100000.00">
+                                </div>
+                                
+                                <div class="input-group-enhanced">
+                                    <label class="input-label-enhanced" for="orcamento_marketing">Orçamento Marketing (R$)</label>
+                                    <input type="number" id="orcamento_marketing" name="orcamento_marketing" class="input-enhanced" step="0.01"
+                                           placeholder="10000.00">
+                                </div>
+                            </div>
+                            
+                            <div class="grid-enhanced grid-2">
+                                <div class="input-group-enhanced">
+                                    <label class="input-label-enhanced" for="prazo_lancamento">Prazo de Lançamento</label>
+                                    <select id="prazo_lancamento" name="prazo_lancamento" class="input-enhanced">
+                                        <option value="">Selecione...</option>
+                                        <option value="1-3 meses">1-3 meses</option>
+                                        <option value="3-6 meses">3-6 meses</option>
+                                        <option value="6-12 meses">6-12 meses</option>
+                                        <option value="Mais de 1 ano">Mais de 1 ano</option>
+                                    </select>
+                                </div>
+                                
+                                <div class="input-group-enhanced">
+                                    <label class="input-label-enhanced" for="concorrentes">Principais Concorrentes</label>
+                                    <input type="text" id="concorrentes" name="concorrentes" class="input-enhanced"
+                                           placeholder="Liste os principais concorrentes...">
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Deep Research -->
+                        <div class="form-section">
+                            <div class="section-header">
+                                <div class="section-icon">
+                                    <i class="fas fa-ship"></i>
+                                </div>
+                                <div>
+                                    <h3 class="section-title">Pesquisa Arqueológica</h3>
+                                    <p class="section-subtitle">WebSailor + Gemini 2.5 Pro para escavação profunda</p>
+                                </div>
+                            </div>
+                            
+                            <div class="input-group-enhanced">
+                                <label class="input-label-enhanced" for="query">Query de Pesquisa Arqueológica</label>
+                                <input type="text" id="query" name="query" class="input-enhanced"
+                                       placeholder="Ex: mercado telemedicina Brasil 2024 tendências oportunidades">
+                                <div class="alert-enhanced alert-info mt-2">
+                                    <i class="fas fa-info-circle"></i>
+                                    <div>
+                                        <strong>Pesquisa Arqueológica Profunda</strong>
+                                        <p>WebSailor navegará pela web coletando dados reais enquanto Gemini 2.5 Pro executa análise forense.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Additional Context -->
+                        <div class="form-section">
+                            <div class="section-header">
+                                <div class="section-icon">
+                                    <i class="fas fa-plus-circle"></i>
+                                </div>
+                                <div>
+                                    <h3 class="section-title">Contexto Adicional</h3>
+                                    <p class="section-subtitle">Informações complementares para análise visceral</p>
+                                </div>
+                            </div>
+                            
+                            <div class="input-group-enhanced">
+                                <label class="input-label-enhanced" for="dados_adicionais">Dados Adicionais para Análise Psicológica</label>
+                                <textarea id="dados_adicionais" name="dados_adicionais" class="input-enhanced textarea-enhanced" rows="6"
+                                          placeholder="Adicione qualquer informação relevante: dores específicas do público, objeções conhecidas, histórico de lançamentos, características psicológicas, etc..."></textarea>
+                            </div>
+                        </div>
+
+                        <!-- Submit Button -->
+                        <div style="text-align: center; padding-top: var(--space-8); border-top: 1px solid var(--bg-tertiary);">
+                            <button type="submit" class="btn-primary-enhanced" style="font-size: 1.125rem; padding: var(--space-5) var(--space-10);">
+                                <i class="fas fa-microscope"></i>
+                                <span>Iniciar Análise Arqueológica Ultra-Detalhada</span>
+                            </button>
+                            
+                            <p style="color: var(--text-muted); font-size: 0.875rem; margin-top: var(--space-4);">
+                                🧠 6 Agentes Psicológicos • 🔬 12 Camadas de Análise • 🎭 Arsenal Completo de Persuasão
+                            </p>
+                        </div>
+                    </form>
+                </div>
+            </section>
+
+            <!-- Agent Capabilities -->
+            <section id="agentCapabilities" style="margin-bottom: var(--space-16);">
+                <!-- Será preenchido dinamicamente -->
+            </section>
+
+            <!-- Enhanced Progress -->
+            <section id="progressArea" style="display: none; margin-bottom: var(--space-16);">
+                <div class="progress-enhanced">
+                    <div class="progress-header-enhanced">
+                        <h3 class="progress-title-enhanced">🔬 Análise Arqueológica em Progresso</h3>
+                        <p class="progress-subtitle-enhanced">Agentes psicológicos escavando dados reais com precisão forense</p>
+                    </div>
+                    
+                    <div class="progress-bar-enhanced">
+                        <div class="progress-fill-enhanced" style="width: 0%;"></div>
+                    </div>
+                    
+                    <div class="progress-info-enhanced">
+                        <div>
+                            <span id="currentStepEnhanced">Iniciando análise arqueológica...</span>
+                        </div>
+                        <div style="display: flex; gap: var(--space-4); font-size: 0.875rem;">
+                            <span>Etapa: <span id="stepCounterEnhanced">0/13</span></span>
+                            <span>Tempo restante: <span id="estimatedTimeEnhanced">--:--</span></span>
+                        </div>
+                    </div>
+                    
+                    <div class="grid-enhanced grid-4" style="margin-top: var(--space-6);">
+                        <div style="display: flex; align-items: center; gap: var(--space-3); padding: var(--space-3); background: var(--bg-surface); border-radius: var(--radius-md);">
+                            <i class="fas fa-ship" style="color: var(--accent-primary);"></i>
+                            <span style="font-size: 0.875rem;">WebSailor navegando</span>
+                        </div>
+                        <div style="display: flex; align-items: center; gap: var(--space-3); padding: var(--space-3); background: var(--bg-surface); border-radius: var(--radius-md);">
+                            <i class="fas fa-robot" style="color: var(--accent-secondary);"></i>
+                            <span style="font-size: 0.875rem;">Gemini 2.5 Pro analisando</span>
+                        </div>
+                        <div style="display: flex; align-items: center; gap: var(--space-3); padding: var(--space-3); background: var(--bg-surface); border-radius: var(--radius-md);">
+                            <i class="fas fa-brain" style="color: var(--accent-warning);"></i>
+                            <span style="font-size: 0.875rem;">Agentes psicológicos</span>
+                        </div>
+                        <div style="display: flex; align-items: center; gap: var(--space-3); padding: var(--space-3); background: var(--bg-surface); border-radius: var(--radius-md);">
+                            <i class="fas fa-shield-check" style="color: var(--accent-success);"></i>
+                            <span style="font-size: 0.875rem;">Zero simulação</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Enhanced Results Area -->
+            <section id="resultsArea" style="display: none;">
+                <!-- Será preenchido dinamicamente -->
+            </section>
+        </div>
+    </main>
+
+    <!-- Enhanced Scripts -->
+    <script src="{{ url_for('static', filename='js/enhanced_analysis.js') }}"></script>
+    
+    <script>
+        // Enhanced initialization
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('🚀 ARQV30 Enhanced v2.0 - Interface Arqueológica Carregada');
+            
+            // Load system status
+            updateSystemStatus();
+            
+            // Setup keyboard shortcuts
+            document.addEventListener('keydown', function(e) {
+                if (e.ctrlKey && e.key === 'Enter') {
+                    e.preventDefault();
+                    document.getElementById('enhancedAnalysisForm').dispatchEvent(new Event('submit'));
+                }
+                
+                if (e.key === 'Escape') {
+                    // Close any open modals
+                    document.querySelectorAll('.modal-enhanced').forEach(modal => modal.remove());
+                }
+            });
+        });
+        
+        async function updateSystemStatus() {
+            try {
+                const response = await fetch('/api/app_status');
+                const data = await response.json();
+                
+                const statusElement = document.getElementById('systemStatus');
+                if (statusElement && data.services) {
+                    const searchProviders = data.services.search_providers;
+                    const aiProviders = data.services.ai_providers || { available: 1 };
+                    
+                    if (searchProviders.available > 0 && aiProviders.available > 0) {
+                        statusElement.className = 'status-enhanced status-online';
+                        statusElement.innerHTML = `
+                            <div class="status-dot"></div>
+                            <span>Sistema Operacional (${searchProviders.available} busca + ${aiProviders.available} IA)</span>
+                        `;
+                    } else {
+                        statusElement.className = 'status-enhanced status-warning';
+                        statusElement.innerHTML = `
+                            <div class="status-dot"></div>
+                            <span>Configuração Parcial</span>
+                        `;
+                    }
+                }
+            } catch (error) {
+                console.error('Erro ao verificar status:', error);
+            }
+        }
+        
+        // Enhanced form validation
+        function validateForm() {
+            const segmento = document.getElementById('segmento').value.trim();
+            
+            if (!segmento) {
+                showEnhancedAlert('Segmento é obrigatório para análise arqueológica', 'error');
+                return false;
+            }
+            
+            if (segmento.length < 3) {
+                showEnhancedAlert('Segmento deve ter pelo menos 3 caracteres', 'error');
+                return false;
+            }
+            
+            return true;
+        }
+        
+        function showEnhancedAlert(message, type = 'info') {
+            const alert = document.createElement('div');
+            alert.className = `alert-enhanced alert-${type}`;
+            alert.style.position = 'fixed';
+            alert.style.top = 'var(--space-6)';
+            alert.style.right = 'var(--space-6)';
+            alert.style.zIndex = '1000';
+            alert.style.maxWidth = '400px';
+            
+            const icons = {
+                info: 'fas fa-info-circle',
+                success: 'fas fa-check-circle',
+                warning: 'fas fa-exclamation-triangle',
+                error: 'fas fa-exclamation-circle'
+            };
+            
+            alert.innerHTML = `
+                <i class="${icons[type]}"></i>
+                <div>
+                    <strong>${type.charAt(0).toUpperCase() + type.slice(1)}</strong>
+                    <p>${message}</p>
+                </div>
+            `;
+            
+            document.body.appendChild(alert);
+            
+            setTimeout(() => {
+                alert.remove();
+            }, 5000);
+        }
+    </script>
+</body>
+</html>

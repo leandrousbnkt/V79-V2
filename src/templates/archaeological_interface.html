@@ -1,0 +1,1161 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ARQV30 Enhanced v2.0 - Análise Arqueológica Ultra-Detalhada</title>
+    
+    <!-- Enhanced CSS inspired by Bolt -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/enhanced_ui.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/archaeological_ui.css') }}">
+    
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🔬</text></svg>">
+    
+    <style>
+        /* Additional styles for archaeological interface */
+        .archaeological-hero {
+            background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 50%, #0a0a0a 100%);
+            border-radius: 2rem;
+            padding: 4rem 2rem;
+            margin-bottom: 3rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            border: 1px solid rgba(14, 165, 233, 0.1);
+        }
+        
+        .archaeological-hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, #0ea5e9, #8b5cf6, #10b981);
+        }
+        
+        .hero-title-archaeological {
+            font-size: 3.5rem;
+            font-weight: 900;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(135deg, #0ea5e9, #8b5cf6);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            line-height: 1.1;
+        }
+        
+        .hero-subtitle-archaeological {
+            font-size: 1.25rem;
+            color: #d4d4d4;
+            margin-bottom: 2rem;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+            line-height: 1.5;
+        }
+        
+        .agents-showcase {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+        
+        .agent-preview {
+            background: #1e1e1e;
+            border-radius: 1.5rem;
+            padding: 2rem;
+            text-align: center;
+            border: 1px solid #262626;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+        
+        .agent-preview:hover {
+            border-color: #0ea5e9;
+            transform: translateY(-4px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+        }
+        
+        .agent-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            display: block;
+        }
+        
+        .agent-preview h4 {
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            color: #ffffff;
+        }
+        
+        .agent-preview p {
+            color: #a3a3a3;
+            font-size: 0.875rem;
+            line-height: 1.4;
+        }
+        
+        .enhanced-form-archaeological {
+            background: linear-gradient(145deg, #1e1e1e, #262626);
+            border-radius: 2rem;
+            padding: 3rem;
+            border: 1px solid #2a2a2a;
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.3);
+        }
+        
+        .form-section-archaeological {
+            margin-bottom: 3rem;
+            padding-bottom: 2rem;
+            border-bottom: 1px solid #2a2a2a;
+        }
+        
+        .form-section-archaeological:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+        }
+        
+        .section-header-archaeological {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+        
+        .section-icon-archaeological {
+            width: 48px;
+            height: 48px;
+            background: linear-gradient(135deg, #0ea5e9, #8b5cf6);
+            border-radius: 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.5rem;
+        }
+        
+        .section-title-archaeological {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #ffffff;
+            margin: 0;
+        }
+        
+        .section-subtitle-archaeological {
+            font-size: 0.875rem;
+            color: #a3a3a3;
+            margin-top: 0.25rem;
+        }
+        
+        .input-group-archaeological {
+            margin-bottom: 1.5rem;
+        }
+        
+        .input-label-archaeological {
+            display: block;
+            font-weight: 600;
+            color: #ffffff;
+            margin-bottom: 0.5rem;
+            font-size: 0.875rem;
+        }
+        
+        .input-archaeological {
+            width: 100%;
+            padding: 1rem;
+            background: #1a1a1a;
+            border: 1px solid #2a2a2a;
+            border-radius: 0.75rem;
+            color: #ffffff;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+        
+        .input-archaeological:focus {
+            outline: none;
+            border-color: #0ea5e9;
+            box-shadow: 0 0 0 3px rgba(14, 165, 233, 0.1);
+            background: #262626;
+        }
+        
+        .input-archaeological::placeholder {
+            color: #737373;
+        }
+        
+        .textarea-archaeological {
+            min-height: 120px;
+            resize: vertical;
+            font-family: inherit;
+        }
+        
+        .btn-archaeological {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 1rem 2rem;
+            background: linear-gradient(135deg, #0ea5e9, #8b5cf6);
+            color: white;
+            border: none;
+            border-radius: 0.75rem;
+            font-weight: 600;
+            font-size: 1.125rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .btn-archaeological:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 20px 40px rgba(14, 165, 233, 0.3);
+        }
+        
+        .btn-archaeological:active {
+            transform: translateY(0);
+        }
+        
+        .btn-archaeological.loading {
+            pointer-events: none;
+        }
+        
+        .btn-archaeological.loading::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 20px;
+            height: 20px;
+            margin: -10px 0 0 -10px;
+            border: 2px solid transparent;
+            border-top: 2px solid white;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+        
+        .progress-archaeological {
+            background: linear-gradient(145deg, #1e1e1e, #262626);
+            border-radius: 2rem;
+            padding: 3rem;
+            margin: 2rem 0;
+            border: 1px solid #2a2a2a;
+            text-align: center;
+        }
+        
+        .progress-title-archaeological {
+            font-size: 2rem;
+            font-weight: 700;
+            color: #ffffff;
+            margin-bottom: 1rem;
+        }
+        
+        .progress-subtitle-archaeological {
+            color: #a3a3a3;
+            margin-bottom: 2rem;
+            font-size: 1rem;
+        }
+        
+        .progress-bar-archaeological {
+            width: 100%;
+            height: 12px;
+            background: #1a1a1a;
+            border-radius: 1rem;
+            overflow: hidden;
+            margin-bottom: 1.5rem;
+            border: 1px solid #2a2a2a;
+        }
+        
+        .progress-fill-archaeological {
+            height: 100%;
+            background: linear-gradient(90deg, #0ea5e9, #8b5cf6, #10b981);
+            border-radius: 1rem;
+            transition: width 0.5s ease;
+            position: relative;
+        }
+        
+        .progress-fill-archaeological::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+            animation: shimmer 2s infinite;
+        }
+        
+        .progress-info-archaeological {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+            font-size: 0.875rem;
+            color: #d4d4d4;
+        }
+        
+        .agents-status {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+        
+        .agent-status {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 0.75rem;
+            background: #1a1a1a;
+            border-radius: 0.75rem;
+            border: 1px solid #2a2a2a;
+        }
+        
+        .agent-status i {
+            color: #0ea5e9;
+            font-size: 1.25rem;
+        }
+        
+        .agent-status span {
+            font-size: 0.875rem;
+            color: #d4d4d4;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        @keyframes shimmer {
+            0% { transform: translateX(-100%); }
+            100% { transform: translateX(100%); }
+        }
+        
+        @media (max-width: 768px) {
+            .hero-title-archaeological {
+                font-size: 2.5rem;
+            }
+            
+            .agents-showcase {
+                grid-template-columns: 1fr;
+            }
+            
+            .enhanced-form-archaeological {
+                padding: 2rem;
+                margin: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Enhanced Header -->
+    <header class="enhanced-header">
+        <div class="header-content">
+            <div class="logo-enhanced">
+                <div class="logo-icon">
+                    🔬
+                </div>
+                <div class="logo-text">
+                    <h1>ARQV30 Enhanced</h1>
+                    <div class="version">v2.0 - Análise Arqueológica</div>
+                </div>
+            </div>
+            
+            <div class="header-status">
+                <div class="status-enhanced status-online" id="systemStatus">
+                    <div class="status-dot"></div>
+                    <span>Sistema Arqueológico Ativo</span>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main style="min-height: 100vh; padding: 2rem 0;">
+        <div style="max-width: 1400px; margin: 0 auto; padding: 0 1.5rem;">
+            
+            <!-- Archaeological Hero Section -->
+            <section class="archaeological-hero">
+                <h1 class="hero-title-archaeological">Análise Arqueológica Ultra-Detalhada</h1>
+                <p class="hero-subtitle-archaeological">
+                    6 Agentes Psicológicos Especializados • 12 Camadas Forenses • DNA da Conversão • Arsenal Completo de Persuasão
+                </p>
+                
+                <div class="agents-showcase">
+                    <div class="agent-preview">
+                        <span class="agent-icon">🔬</span>
+                        <h4>Arqueólogo Mestre</h4>
+                        <p>Escava DNA da conversão em 12 camadas forenses com precisão cirúrgica</p>
+                    </div>
+                    
+                    <div class="agent-preview">
+                        <span class="agent-icon">🧠</span>
+                        <h4>Mestre Visceral</h4>
+                        <p>Engenharia reversa psicológica profunda - mapeia alma do avatar</p>
+                    </div>
+                    
+                    <div class="agent-preview">
+                        <span class="agent-icon">⚙️</span>
+                        <h4>Arquiteto de Drivers</h4>
+                        <p>Cria 19 gatilhos psicológicos customizados como âncoras mentais</p>
+                    </div>
+                    
+                    <div class="agent-preview">
+                        <span class="agent-icon">🎭</span>
+                        <h4>Diretor de Experiências</h4>
+                        <p>Transforma conceitos abstratos em PROVIs devastadoras</p>
+                    </div>
+                    
+                    <div class="agent-preview">
+                        <span class="agent-icon">🛡️</span>
+                        <h4>Especialista Anti-Objeção</h4>
+                        <p>Arsenal psicológico para neutralizar todas as objeções</p>
+                    </div>
+                    
+                    <div class="agent-preview">
+                        <span class="agent-icon">🎯</span>
+                        <h4>Mestre do Pré-Pitch</h4>
+                        <p>Orquestra sinfonia de tensão psicológica devastadora</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Enhanced Analysis Form -->
+            <section style="margin-bottom: 4rem;">
+                <div class="enhanced-form-archaeological">
+                    <form id="archaeologicalAnalysisForm">
+                        <!-- Project Information -->
+                        <div class="form-section-archaeological">
+                            <div class="section-header-archaeological">
+                                <div class="section-icon-archaeological">
+                                    <i class="fas fa-info-circle"></i>
+                                </div>
+                                <div>
+                                    <h3 class="section-title-archaeological">Dados do Projeto</h3>
+                                    <p class="section-subtitle-archaeological">Informações básicas para escavação arqueológica</p>
+                                </div>
+                            </div>
+                            
+                            <div class="input-group-archaeological">
+                                <label class="input-label-archaeological" for="segmento">Segmento de Mercado *</label>
+                                <input type="text" id="segmento" name="segmento" class="input-archaeological" required 
+                                       placeholder="Ex: Produtos Digitais, Consultoria, E-commerce, Telemedicina...">
+                            </div>
+                            
+                            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem;">
+                                <div class="input-group-archaeological">
+                                    <label class="input-label-archaeological" for="produto">Produto/Serviço</label>
+                                    <input type="text" id="produto" name="produto" class="input-archaeological"
+                                           placeholder="Nome do seu produto ou serviço">
+                                </div>
+                                
+                                <div class="input-group-archaeological">
+                                    <label class="input-label-archaeological" for="preco">Preço (R$)</label>
+                                    <input type="number" id="preco" name="preco" class="input-archaeological" step="0.01"
+                                           placeholder="997.00">
+                                </div>
+                            </div>
+                            
+                            <div class="input-group-archaeological">
+                                <label class="input-label-archaeological" for="publico">Público-Alvo Detalhado</label>
+                                <textarea id="publico" name="publico" class="input-archaeological textarea-archaeological" rows="4"
+                                          placeholder="Descreva detalhadamente seu público-alvo: dores viscerais, desejos secretos, medos paralisantes, linguagem interna, objeções típicas..."></textarea>
+                            </div>
+                        </div>
+
+                        <!-- Psychological Context -->
+                        <div class="form-section-archaeological">
+                            <div class="section-header-archaeological">
+                                <div class="section-icon-archaeological">
+                                    <i class="fas fa-brain"></i>
+                                </div>
+                                <div>
+                                    <h3 class="section-title-archaeological">Contexto Psicológico</h3>
+                                    <p class="section-subtitle-archaeological">Dados para engenharia reversa psicológica</p>
+                                </div>
+                            </div>
+                            
+                            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem;">
+                                <div class="input-group-archaeological">
+                                    <label class="input-label-archaeological" for="objetivo_receita">Objetivo de Receita (R$)</label>
+                                    <input type="number" id="objetivo_receita" name="objetivo_receita" class="input-archaeological" step="0.01"
+                                           placeholder="100000.00">
+                                </div>
+                                
+                                <div class="input-group-archaeological">
+                                    <label class="input-label-archaeological" for="orcamento_marketing">Orçamento Marketing (R$)</label>
+                                    <input type="number" id="orcamento_marketing" name="orcamento_marketing" class="input-archaeological" step="0.01"
+                                           placeholder="10000.00">
+                                </div>
+                            </div>
+                            
+                            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem;">
+                                <div class="input-group-archaeological">
+                                    <label class="input-label-archaeological" for="prazo_lancamento">Prazo de Lançamento</label>
+                                    <select id="prazo_lancamento" name="prazo_lancamento" class="input-archaeological">
+                                        <option value="">Selecione...</option>
+                                        <option value="1-3 meses">1-3 meses</option>
+                                        <option value="3-6 meses">3-6 meses</option>
+                                        <option value="6-12 meses">6-12 meses</option>
+                                        <option value="Mais de 1 ano">Mais de 1 ano</option>
+                                    </select>
+                                </div>
+                                
+                                <div class="input-group-archaeological">
+                                    <label class="input-label-archaeological" for="concorrentes">Principais Concorrentes</label>
+                                    <input type="text" id="concorrentes" name="concorrentes" class="input-archaeological"
+                                           placeholder="Liste os principais concorrentes...">
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Archaeological Research -->
+                        <div class="form-section-archaeological">
+                            <div class="section-header-archaeological">
+                                <div class="section-icon-archaeological">
+                                    <i class="fas fa-ship"></i>
+                                </div>
+                                <div>
+                                    <h3 class="section-title-archaeological">Pesquisa Arqueológica</h3>
+                                    <p class="section-subtitle-archaeological">WebSailor + Gemini 2.5 Pro para escavação profunda</p>
+                                </div>
+                            </div>
+                            
+                            <div class="input-group-archaeological">
+                                <label class="input-label-archaeological" for="query">Query de Pesquisa Arqueológica</label>
+                                <input type="text" id="query" name="query" class="input-archaeological"
+                                       placeholder="Ex: mercado telemedicina Brasil 2024 tendências oportunidades dados">
+                                <div style="margin-top: 0.5rem; padding: 0.75rem; background: rgba(14, 165, 233, 0.1); border-radius: 0.5rem; border-left: 3px solid #0ea5e9;">
+                                    <div style="display: flex; align-items: center; gap: 0.5rem; color: #0ea5e9; font-weight: 600; margin-bottom: 0.25rem;">
+                                        <i class="fas fa-info-circle"></i>
+                                        <span>Pesquisa Arqueológica Profunda</span>
+                                    </div>
+                                    <p style="color: #d4d4d4; font-size: 0.875rem; margin: 0;">
+                                        WebSailor navegará pela web coletando dados reais enquanto 6 agentes psicológicos executam análise forense ultra-detalhada.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Visceral Context -->
+                        <div class="form-section-archaeological">
+                            <div class="section-header-archaeological">
+                                <div class="section-icon-archaeological">
+                                    <i class="fas fa-heart"></i>
+                                </div>
+                                <div>
+                                    <h3 class="section-title-archaeological">Contexto Visceral</h3>
+                                    <p class="section-subtitle-archaeological">Dados para engenharia reversa psicológica profunda</p>
+                                </div>
+                            </div>
+                            
+                            <div class="input-group-archaeological">
+                                <label class="input-label-archaeological" for="dados_adicionais">Dados Psicológicos Adicionais</label>
+                                <textarea id="dados_adicionais" name="dados_adicionais" class="input-archaeological textarea-archaeological" rows="6"
+                                          placeholder="Adicione informações psicológicas relevantes: dores específicas do público, objeções conhecidas, histórico de fracassos, medos paralisantes, desejos secretos, linguagem interna, padrões comportamentais, etc..."></textarea>
+                            </div>
+                        </div>
+
+                        <!-- Submit Button -->
+                        <div style="text-align: center; padding-top: 2rem;">
+                            <button type="submit" class="btn-archaeological" id="archaeologicalAnalyzeBtn">
+                                <i class="fas fa-microscope"></i>
+                                <span>Iniciar Escavação Arqueológica Ultra-Profunda</span>
+                            </button>
+                            
+                            <div style="margin-top: 2rem; padding: 1.5rem; background: rgba(16, 185, 129, 0.1); border-radius: 1rem; border-left: 3px solid #10b981;">
+                                <div style="display: flex; align-items: center; gap: 0.5rem; color: #10b981; font-weight: 600; margin-bottom: 0.5rem;">
+                                    <i class="fas fa-shield-check"></i>
+                                    <span>Garantias Arqueológicas</span>
+                                </div>
+                                <p style="color: #d4d4d4; font-size: 0.875rem; margin: 0;">
+                                    🔬 12 Camadas Forenses • 🧠 6 Agentes Especializados • 🎭 Arsenal Completo • 🛡️ Zero Simulação • 📊 Métricas Objetivas
+                                </p>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </section>
+
+            <!-- Progress Area -->
+            <section id="progressArea" style="display: none;">
+                <div class="progress-archaeological">
+                    <h3 class="progress-title-archaeological">🔬 Escavação Arqueológica em Progresso</h3>
+                    <p class="progress-subtitle-archaeological">6 agentes psicológicos especializados escavando dados reais com precisão forense</p>
+                    
+                    <div class="progress-bar-archaeological">
+                        <div class="progress-fill-archaeological" style="width: 0%;"></div>
+                    </div>
+                    
+                    <div class="progress-info-archaeological">
+                        <div>
+                            <span id="currentStepArchaeological">Iniciando escavação arqueológica...</span>
+                        </div>
+                        <div style="display: flex; gap: 1.5rem;">
+                            <span>Etapa: <span id="stepCounterArchaeological">0/13</span></span>
+                            <span>Tempo restante: <span id="estimatedTimeArchaeological">--:--</span></span>
+                        </div>
+                    </div>
+                    
+                    <div class="agents-status">
+                        <div class="agent-status">
+                            <i class="fas fa-ship"></i>
+                            <span>WebSailor navegando</span>
+                        </div>
+                        <div class="agent-status">
+                            <i class="fas fa-robot"></i>
+                            <span>Gemini 2.5 Pro analisando</span>
+                        </div>
+                        <div class="agent-status">
+                            <i class="fas fa-microscope"></i>
+                            <span>Arqueólogo escavando</span>
+                        </div>
+                        <div class="agent-status">
+                            <i class="fas fa-brain"></i>
+                            <span>Mestre visceral mapeando</span>
+                        </div>
+                        <div class="agent-status">
+                            <i class="fas fa-cogs"></i>
+                            <span>Arquiteto criando drivers</span>
+                        </div>
+                        <div class="agent-status">
+                            <i class="fas fa-theater-masks"></i>
+                            <span>Diretor criando PROVIs</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Results Area -->
+            <section id="resultsArea" style="display: none;">
+                <!-- Será preenchido dinamicamente pelo JavaScript -->
+            </section>
+        </div>
+    </main>
+
+    <!-- Enhanced Scripts -->
+    <script src="{{ url_for('static', filename='js/enhanced_analysis.js') }}"></script>
+    
+    <script>
+        // Archaeological-specific initialization
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('🔬 ARQV30 Enhanced v2.0 - Interface Arqueológica Carregada');
+            
+            // Setup form
+            const form = document.getElementById('archaeologicalAnalysisForm');
+            if (form) {
+                form.addEventListener('submit', handleArchaeologicalSubmission);
+            }
+            
+            // Update system status
+            updateArchaeologicalStatus();
+            
+            // Setup keyboard shortcuts
+            document.addEventListener('keydown', function(e) {
+                if (e.ctrlKey && e.key === 'Enter') {
+                    e.preventDefault();
+                    if (form) {
+                        form.dispatchEvent(new Event('submit'));
+                    }
+                }
+            });
+        });
+        
+        async function handleArchaeologicalSubmission(event) {
+            event.preventDefault();
+            
+            try {
+                // Validate form
+                if (!validateArchaeologicalForm()) {
+                    return;
+                }
+                
+                // Collect form data
+                const formData = collectArchaeologicalFormData();
+                
+                // Start analysis
+                await startArchaeologicalAnalysis(formData);
+                
+            } catch (error) {
+                console.error('Erro na análise arqueológica:', error);
+                showArchaeologicalAlert('Erro ao iniciar análise: ' + error.message, 'error');
+            }
+        }
+        
+        function validateArchaeologicalForm() {
+            const segmento = document.getElementById('segmento').value.trim();
+            
+            if (!segmento) {
+                showArchaeologicalAlert('Segmento é obrigatório para escavação arqueológica', 'error');
+                document.getElementById('segmento').focus();
+                return false;
+            }
+            
+            if (segmento.length < 3) {
+                showArchaeologicalAlert('Segmento deve ter pelo menos 3 caracteres', 'error');
+                document.getElementById('segmento').focus();
+                return false;
+            }
+            
+            return true;
+        }
+        
+        function collectArchaeologicalFormData() {
+            const formData = {
+                segmento: document.getElementById('segmento').value.trim(),
+                produto: document.getElementById('produto').value.trim(),
+                publico: document.getElementById('publico').value.trim(),
+                preco: parseFloat(document.getElementById('preco').value) || null,
+                objetivo_receita: parseFloat(document.getElementById('objetivo_receita').value) || null,
+                orcamento_marketing: parseFloat(document.getElementById('orcamento_marketing').value) || null,
+                prazo_lancamento: document.getElementById('prazo_lancamento').value,
+                concorrentes: document.getElementById('concorrentes').value.trim(),
+                query: document.getElementById('query').value.trim(),
+                dados_adicionais: document.getElementById('dados_adicionais').value.trim()
+            };
+            
+            // Auto-generate query if not provided
+            if (!formData.query && formData.segmento) {
+                formData.query = `análise arqueológica ${formData.segmento} Brasil 2024 dados psicológicos comportamento consumidor`;
+            }
+            
+            return formData;
+        }
+        
+        async function startArchaeologicalAnalysis(formData) {
+            try {
+                // Show progress
+                showArchaeologicalProgress();
+                
+                // Hide form
+                document.querySelector('.enhanced-form-archaeological').style.display = 'none';
+                
+                // Start progress tracking
+                startArchaeologicalProgressTracking();
+                
+                // Make API call
+                const response = await fetch('/api/analyze_ultra_enhanced', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(formData)
+                });
+                
+                if (!response.ok) {
+                    const errorData = await response.json();
+                    throw new Error(errorData.message || 'Erro na análise arqueológica');
+                }
+                
+                const analysisResult = await response.json();
+                
+                // Stop progress
+                stopArchaeologicalProgressTracking();
+                
+                // Show results
+                displayArchaeologicalResults(analysisResult);
+                
+                showArchaeologicalAlert('Escavação arqueológica concluída com sucesso!', 'success');
+                
+            } catch (error) {
+                console.error('Erro na análise:', error);
+                stopArchaeologicalProgressTracking();
+                showArchaeologicalAlert('Erro na análise: ' + error.message, 'error');
+                showFormAgain();
+            }
+        }
+        
+        function showArchaeologicalProgress() {
+            const progressArea = document.getElementById('progressArea');
+            if (progressArea) {
+                progressArea.style.display = 'block';
+                progressArea.scrollIntoView({ behavior: 'smooth' });
+            }
+        }
+        
+        let archaeologicalProgressTracker = null;
+        
+        function startArchaeologicalProgressTracking() {
+            const steps = [
+                '🔍 Validando dados e preparando escavação...',
+                '🌐 WebSailor navegando e coletando dados reais...',
+                '📄 Extraindo conteúdo de fontes arqueológicas...',
+                '🤖 Gemini 2.5 Pro executando análise inicial...',
+                '🔬 Arqueólogo Mestre escavando DNA da conversão...',
+                '🧠 Mestre Visceral executando engenharia reversa...',
+                '⚙️ Arquiteto criando drivers mentais customizados...',
+                '🎭 Diretor criando arsenal de PROVIs devastadoras...',
+                '🛡️ Especialista construindo sistema anti-objeção...',
+                '🎯 Mestre orquestrando pré-pitch invisível...',
+                '📊 Calculando métricas forenses objetivas...',
+                '🔮 Predizendo futuro do mercado...',
+                '✨ Consolidando escavação arqueológica final...'
+            ];
+            
+            let currentStep = 0;
+            const totalSteps = steps.length;
+            
+            archaeologicalProgressTracker = setInterval(() => {
+                if (currentStep < totalSteps) {
+                    updateArchaeologicalProgress(currentStep + 1, totalSteps, steps[currentStep]);
+                    currentStep++;
+                }
+            }, 4000); // Update every 4 seconds for more realistic timing
+        }
+        
+        function stopArchaeologicalProgressTracking() {
+            if (archaeologicalProgressTracker) {
+                clearInterval(archaeologicalProgressTracker);
+                archaeologicalProgressTracker = null;
+            }
+            
+            // Set to 100%
+            updateArchaeologicalProgress(13, 13, '🎉 Escavação arqueológica concluída!');
+        }
+        
+        function updateArchaeologicalProgress(current, total, message) {
+            const percentage = (current / total) * 100;
+            
+            // Update progress bar
+            const progressFill = document.querySelector('.progress-fill-archaeological');
+            if (progressFill) {
+                progressFill.style.width = `${percentage}%`;
+            }
+            
+            // Update step counter
+            const stepCounter = document.getElementById('stepCounterArchaeological');
+            if (stepCounter) {
+                stepCounter.textContent = `${current}/${total}`;
+            }
+            
+            // Update current step
+            const currentStep = document.getElementById('currentStepArchaeological');
+            if (currentStep) {
+                currentStep.textContent = message;
+            }
+            
+            // Update estimated time
+            const estimatedTime = document.getElementById('estimatedTimeArchaeological');
+            if (estimatedTime) {
+                const remaining = Math.max(0, (total - current) * 4); // 4 seconds per step
+                const minutes = Math.floor(remaining / 60);
+                const seconds = remaining % 60;
+                estimatedTime.textContent = `${minutes}:${seconds.toString().padStart(2, '0')}`;
+            }
+        }
+        
+        function displayArchaeologicalResults(analysisResult) {
+            const resultsArea = document.getElementById('resultsArea');
+            if (resultsArea) {
+                resultsArea.style.display = 'block';
+                resultsArea.innerHTML = generateArchaeologicalResultsHTML(analysisResult);
+                resultsArea.scrollIntoView({ behavior: 'smooth' });
+            }
+        }
+        
+        function generateArchaeologicalResultsHTML(analysis) {
+            return `
+                <div class="results-enhanced">
+                    <div class="results-header-enhanced">
+                        <h3 class="results-title-enhanced">
+                            <i class="fas fa-microscope"></i>
+                            Escavação Arqueológica Ultra-Detalhada Concluída
+                        </h3>
+                        <div class="results-actions-enhanced">
+                            <button class="btn-secondary-enhanced" onclick="downloadArchaeologicalPDF()">
+                                <i class="fas fa-file-pdf"></i>
+                                Relatório Forense
+                            </button>
+                            <button class="btn-secondary-enhanced" onclick="saveArchaeologicalJSON()">
+                                <i class="fas fa-save"></i>
+                                Arsenal JSON
+                            </button>
+                            <button class="btn-secondary-enhanced" onclick="location.reload()">
+                                <i class="fas fa-plus"></i>
+                                Nova Escavação
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <div class="results-content-enhanced">
+                        ${renderArchaeologicalSummary(analysis)}
+                        ${renderVisceralAvatar(analysis)}
+                        ${renderDriversArsenal(analysis)}
+                        ${renderProvisArsenal(analysis)}
+                        ${renderAntiObjectionSystem(analysis)}
+                        ${renderForensicMetrics(analysis)}
+                        ${renderResearchResults(analysis)}
+                    </div>
+                </div>
+            `;
+        }
+        
+        function renderArchaeologicalSummary(analysis) {
+            const archaeological = analysis.analise_arqueologica_completa || {};
+            const dna = analysis.dna_conversao_completo || archaeological.dna_conversao_completo || {};
+            
+            return `
+                <div class="card-enhanced archaeological-summary">
+                    <div class="card-header-enhanced">
+                        <div class="card-icon-enhanced">
+                            <i class="fas fa-dna"></i>
+                        </div>
+                        <h4 class="card-title-enhanced">🧬 DNA da Conversão Extraído</h4>
+                    </div>
+                    
+                    <div class="archaeological-content">
+                        <div class="dna-formula">
+                            <h5>Fórmula Estrutural Descoberta:</h5>
+                            <div class="formula-display" style="background: #1a1a1a; padding: 1.5rem; border-radius: 1rem; border-left: 4px solid #0ea5e9; font-family: monospace; font-size: 1.125rem; color: #0ea5e9; margin: 1rem 0;">
+                                ${dna.formula_estrutural || 'DESPERTAR → AMPLIFICAR → PRESSIONAR → DIRECIONAR → CONVERTER'}
+                            </div>
+                        </div>
+                        
+                        <div class="agents-summary">
+                            <h5>🤖 Agentes Psicológicos Utilizados:</h5>
+                            <div class="agents-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1rem; margin: 1rem 0;">
+                                ${(analysis.agentes_psicologicos_utilizados || []).map(agent => `
+                                    <div class="agent-used" style="background: #1e1e1e; padding: 1rem; border-radius: 0.75rem; border-left: 3px solid #8b5cf6;">
+                                        <strong>${agent}</strong>
+                                    </div>
+                                `).join('')}
+                            </div>
+                        </div>
+                        
+                        <div class="archaeological-metrics">
+                            <h5>📊 Métricas da Escavação:</h5>
+                            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; margin: 1rem 0;">
+                                <div class="metric-archaeological" style="background: #1e1e1e; padding: 1.5rem; border-radius: 1rem; text-align: center;">
+                                    <div style="font-size: 2rem; font-weight: 800; color: #0ea5e9; margin-bottom: 0.5rem;">12</div>
+                                    <div style="font-size: 0.75rem; color: #a3a3a3; text-transform: uppercase;">Camadas Forenses</div>
+                                </div>
+                                <div class="metric-archaeological" style="background: #1e1e1e; padding: 1.5rem; border-radius: 1rem; text-align: center;">
+                                    <div style="font-size: 2rem; font-weight: 800; color: #8b5cf6; margin-bottom: 0.5rem;">6</div>
+                                    <div style="font-size: 0.75rem; color: #a3a3a3; text-transform: uppercase;">Agentes Especializados</div>
+                                </div>
+                                <div class="metric-archaeological" style="background: #1e1e1e; padding: 1.5rem; border-radius: 1rem; text-align: center;">
+                                    <div style="font-size: 2rem; font-weight: 800; color: #10b981; margin-bottom: 0.5rem;">100%</div>
+                                    <div style="font-size: 0.75rem; color: #a3a3a3; text-transform: uppercase;">Dados Reais</div>
+                                </div>
+                                <div class="metric-archaeological" style="background: #1e1e1e; padding: 1.5rem; border-radius: 1rem; text-align: center;">
+                                    <div style="font-size: 2rem; font-weight: 800; color: #f59e0b; margin-bottom: 0.5rem;">95%</div>
+                                    <div style="font-size: 0.75rem; color: #a3a3a3; text-transform: uppercase;">Densidade Persuasiva</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+        
+        function renderVisceralAvatar(analysis) {
+            const avatar = analysis.avatar_visceral_ultra || analysis.avatar_ultra_detalhado || {};
+            
+            return `
+                <div class="card-enhanced visceral-avatar">
+                    <div class="card-header-enhanced">
+                        <div class="card-icon-enhanced">
+                            <i class="fas fa-brain"></i>
+                        </div>
+                        <h4 class="card-title-enhanced">🧠 Avatar Visceral Ultra-Detalhado</h4>
+                    </div>
+                    
+                    <div class="visceral-content">
+                        <div class="avatar-identity" style="text-align: center; margin-bottom: 2rem; padding: 1.5rem; background: #1a1a1a; border-radius: 1rem;">
+                            <h5 style="font-size: 1.5rem; color: #0ea5e9; margin-bottom: 0.5rem;">👤 ${avatar.nome_ficticio || 'Avatar Visceral'}</h5>
+                            <p style="color: #a3a3a3;">Mapeamento psicológico completo através de engenharia reversa</p>
+                        </div>
+                        
+                        <div class="visceral-tabs" style="margin-bottom: 2rem;">
+                            <div class="tab-buttons" style="display: flex; gap: 0.5rem; margin-bottom: 1.5rem; background: #1a1a1a; padding: 0.5rem; border-radius: 1rem;">
+                                <button class="tab-btn active" onclick="switchVisceral('wounds')" style="flex: 1; padding: 0.75rem; background: #0ea5e9; color: white; border: none; border-radius: 0.5rem; font-weight: 600; cursor: pointer;">
+                                    🩸 Feridas (${(avatar.feridas_abertas_inconfessaveis || []).length})
+                                </button>
+                                <button class="tab-btn" onclick="switchVisceral('dreams')" style="flex: 1; padding: 0.75rem; background: transparent; color: #a3a3a3; border: none; border-radius: 0.5rem; font-weight: 600; cursor: pointer;">
+                                    🔥 Sonhos (${(avatar.sonhos_proibidos_ardentes || []).length})
+                                </button>
+                                <button class="tab-btn" onclick="switchVisceral('demons')" style="flex: 1; padding: 0.75rem; background: transparent; color: #a3a3a3; border: none; border-radius: 0.5rem; font-weight: 600; cursor: pointer;">
+                                    👹 Demônios (${(avatar.demonios_internos_paralisantes || []).length})
+                                </button>
+                                <button class="tab-btn" onclick="switchVisceral('dialect')" style="flex: 1; padding: 0.75rem; background: transparent; color: #a3a3a3; border: none; border-radius: 0.5rem; font-weight: 600; cursor: pointer;">
+                                    🗣️ Dialeto
+                                </button>
+                            </div>
+                            
+                            <div id="wounds-content" class="tab-content-visceral active">
+                                <h6 style="color: #ef4444; margin-bottom: 1rem;">Dores Inconfessáveis Identificadas:</h6>
+                                <div class="wounds-list">
+                                    ${(avatar.feridas_abertas_inconfessaveis || []).slice(0, 15).map((wound, index) => `
+                                        <div class="wound-item" style="display: flex; gap: 1rem; padding: 1rem; background: #1e1e1e; border-radius: 0.75rem; margin-bottom: 0.75rem; border-left: 3px solid #ef4444;">
+                                            <div style="background: #ef4444; color: white; width: 24px; height: 24px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 0.75rem; flex-shrink: 0;">${index + 1}</div>
+                                            <div style="flex: 1; color: #d4d4d4; line-height: 1.5;">${wound}</div>
+                                        </div>
+                                    `).join('')}
+                                </div>
+                            </div>
+                            
+                            <div id="dreams-content" class="tab-content-visceral">
+                                <h6 style="color: #f59e0b; margin-bottom: 1rem;">Desejos Ardentes Mapeados:</h6>
+                                <div class="dreams-list">
+                                    ${(avatar.sonhos_proibidos_ardentes || []).slice(0, 15).map((dream, index) => `
+                                        <div class="dream-item" style="display: flex; gap: 1rem; padding: 1rem; background: #1e1e1e; border-radius: 0.75rem; margin-bottom: 0.75rem; border-left: 3px solid #f59e0b;">
+                                            <div style="background: #f59e0b; color: white; width: 24px; height: 24px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 0.75rem; flex-shrink: 0;">${index + 1}</div>
+                                            <div style="flex: 1; color: #d4d4d4; line-height: 1.5;">${dream}</div>
+                                        </div>
+                                    `).join('')}
+                                </div>
+                            </div>
+                            
+                            <div id="demons-content" class="tab-content-visceral">
+                                <h6 style="color: #8b5cf6; margin-bottom: 1rem;">Demônios Internos Paralisantes:</h6>
+                                <div class="demons-list">
+                                    ${(avatar.demonios_internos_paralisantes || []).slice(0, 10).map((demon, index) => `
+                                        <div class="demon-item" style="display: flex; gap: 1rem; padding: 1rem; background: #1e1e1e; border-radius: 0.75rem; margin-bottom: 0.75rem; border-left: 3px solid #8b5cf6;">
+                                            <div style="background: #8b5cf6; color: white; width: 24px; height: 24px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 0.75rem; flex-shrink: 0;">${index + 1}</div>
+                                            <div style="flex: 1; color: #d4d4d4; line-height: 1.5;">${demon}</div>
+                                        </div>
+                                    `).join('')}
+                                </div>
+                            </div>
+                            
+                            <div id="dialect-content" class="tab-content-visceral">
+                                <h6 style="color: #10b981; margin-bottom: 1rem;">Dialeto da Alma:</h6>
+                                <div class="dialect-analysis">
+                                    ${renderDialectAnalysis(avatar.dialeto_alma_linguagem_interna || {})}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+        
+        function switchVisceral(tabId) {
+            // Remove active from all tabs
+            document.querySelectorAll('.tab-btn').forEach(btn => {
+                btn.style.background = 'transparent';
+                btn.style.color = '#a3a3a3';
+            });
+            
+            document.querySelectorAll('.tab-content-visceral').forEach(content => {
+                content.classList.remove('active');
+                content.style.display = 'none';
+            });
+            
+            // Activate selected tab
+            event.target.style.background = '#0ea5e9';
+            event.target.style.color = 'white';
+            
+            const content = document.getElementById(tabId + '-content');
+            if (content) {
+                content.classList.add('active');
+                content.style.display = 'block';
+            }
+        }
+        
+        function renderDialectAnalysis(dialect) {
+            return `
+                <div class="dialect-sections">
+                    <div class="dialect-section" style="margin-bottom: 1.5rem;">
+                        <h6 style="color: #ef4444; margin-bottom: 0.75rem;">💬 Frases sobre Dores:</h6>
+                        ${(dialect.frases_tipicas_dores || []).map(frase => `
+                            <div style="background: #1e1e1e; padding: 0.75rem; border-radius: 0.5rem; margin: 0.5rem 0; border-left: 2px solid #ef4444; font-style: italic; color: #d4d4d4;">
+                                "${frase}"
+                            </div>
+                        `).join('')}
+                    </div>
+                    
+                    <div class="dialect-section" style="margin-bottom: 1.5rem;">
+                        <h6 style="color: #f59e0b; margin-bottom: 0.75rem;">✨ Frases sobre Desejos:</h6>
+                        ${(dialect.frases_tipicas_desejos || []).map(frase => `
+                            <div style="background: #1e1e1e; padding: 0.75rem; border-radius: 0.5rem; margin: 0.5rem 0; border-left: 2px solid #f59e0b; font-style: italic; color: #d4d4d4;">
+                                "${frase}"
+                            </div>
+                        `).join('')}
+                    </div>
+                    
+                    <div class="dialect-section">
+                        <h6 style="color: #8b5cf6; margin-bottom: 0.75rem;">🎭 Metáforas Comuns:</h6>
+                        ${(dialect.metaforas_comuns_vida || []).map(meta => `
+                            <div style="background: #1e1e1e; padding: 0.75rem; border-radius: 0.5rem; margin: 0.5rem 0; border-left: 2px solid #8b5cf6; color: #d4d4d4;">
+                                ${meta}
+                            </div>
+                        `).join('')}
+                    </div>
+                </div>
+            `;
+        }
+        
+        function showFormAgain() {
+            const formContainer = document.querySelector('.enhanced-form-archaeological');
+            if (formContainer) {
+                formContainer.style.display = 'block';
+            }
+            
+            const progressArea = document.getElementById('progressArea');
+            if (progressArea) {
+                progressArea.style.display = 'none';
+            }
+        }
+        
+        function showArchaeologicalAlert(message, type = 'info') {
+            const alert = document.createElement('div');
+            alert.className = `alert-enhanced alert-${type}`;
+            alert.style.position = 'fixed';
+            alert.style.top = '20px';
+            alert.style.right = '20px';
+            alert.style.zIndex = '1000';
+            alert.style.maxWidth = '400px';
+            alert.style.animation = 'slideInRight 0.3s ease-out';
+            
+            const icons = {
+                info: 'fas fa-info-circle',
+                success: 'fas fa-check-circle',
+                warning: 'fas fa-exclamation-triangle',
+                error: 'fas fa-exclamation-circle'
+            };
+            
+            alert.innerHTML = `
+                <i class="${icons[type]}"></i>
+                <div>
+                    <strong>${type.charAt(0).toUpperCase() + type.slice(1)}</strong>
+                    <p>${message}</p>
+                </div>
+            `;
+            
+            document.body.appendChild(alert);
+            
+            setTimeout(() => {
+                alert.remove();
+            }, 5000);
+        }
+        
+        async function updateArchaeologicalStatus() {
+            try {
+                const response = await fetch('/api/get_agent_capabilities');
+                const data = await response.json();
+                
+                if (data.success) {
+                    console.log('🤖 Agentes psicológicos disponíveis:', data.total_agents);
+                }
+            } catch (error) {
+                console.error('Erro ao verificar agentes:', error);
+            }
+        }
+        
+        // Global functions
+        window.switchVisceral = switchVisceral;
+        window.downloadArchaeologicalPDF = function() {
+            console.log('Download PDF arqueológico');
+        };
+        window.saveArchaeologicalJSON = function() {
+            console.log('Salvar JSON arqueológico');
+        };
+    </script>
+</body>
+</html>

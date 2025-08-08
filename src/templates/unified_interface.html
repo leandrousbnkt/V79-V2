@@ -1,0 +1,565 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ARQV30 Enhanced v2.0 - Interface Unificada</title>
+    
+    <!-- Enhanced CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/enhanced_ui.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/archaeological_ui.css') }}">
+    
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🚀</text></svg>">
+</head>
+<body>
+    <!-- Enhanced Header -->
+    <header class="enhanced-header">
+        <div class="header-content">
+            <div class="logo-enhanced">
+                <div class="logo-icon">
+                    🚀
+                </div>
+                <div class="logo-text">
+                    <h1>ARQV30 Enhanced</h1>
+                    <div class="version">v2.0 - Interface Unificada</div>
+                </div>
+            </div>
+            
+            <div class="header-status">
+                <div class="status-enhanced status-online" id="systemStatus">
+                    <div class="status-dot"></div>
+                    <span>Sistema Unificado</span>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main style="min-height: 100vh; padding: var(--space-8) 0;">
+        <div style="max-width: 1400px; margin: 0 auto; padding: 0 var(--space-6);">
+            
+            <!-- Hero Section -->
+            <section style="text-align: center; margin-bottom: var(--space-16); padding: var(--space-12) 0;">
+                <h1 style="font-size: 3.5rem; font-weight: 900; margin-bottom: var(--space-6); background: linear-gradient(135deg, var(--primary-400), var(--accent-secondary)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">
+                    Interface Unificada de Análise
+                </h1>
+                <p style="font-size: 1.25rem; color: var(--text-secondary); margin-bottom: var(--space-8); max-width: 900px; margin-left: auto; margin-right: auto;">
+                    Todas as capacidades em uma interface • Exa Neural Search • PyMuPDF Pro • Agentes Psicológicos • Zero Simulação
+                </p>
+                
+                <div class="grid-enhanced grid-4" style="margin-top: var(--space-12);">
+                    <div class="card-enhanced" style="text-align: center; padding: var(--space-8);">
+                        <div style="font-size: 3rem; margin-bottom: var(--space-4); color: var(--accent-primary);">🔍</div>
+                        <h4 style="font-weight: 700; margin-bottom: var(--space-2);">Exa Neural Search</h4>
+                        <p style="color: var(--text-muted); font-size: 0.875rem;">Busca neural avançada</p>
+                    </div>
+                    
+                    <div class="card-enhanced" style="text-align: center; padding: var(--space-8);">
+                        <div style="font-size: 3rem; margin-bottom: var(--space-4); color: var(--accent-secondary);">📄</div>
+                        <h4 style="font-weight: 700; margin-bottom: var(--space-2);">PyMuPDF Pro</h4>
+                        <p style="color: var(--text-muted); font-size: 0.875rem;">Extração avançada de PDF</p>
+                    </div>
+                    
+                    <div class="card-enhanced" style="text-align: center; padding: var(--space-8);">
+                        <div style="font-size: 3rem; margin-bottom: var(--space-4); color: var(--accent-warning);">🧠</div>
+                        <h4 style="font-weight: 700; margin-bottom: var(--space-2);">Agentes Psicológicos</h4>
+                        <p style="color: var(--text-muted); font-size: 0.875rem;">6 agentes especializados</p>
+                    </div>
+                    
+                    <div class="card-enhanced" style="text-align: center; padding: var(--space-8);">
+                        <div style="font-size: 3rem; margin-bottom: var(--space-4); color: var(--accent-success);">🛡️</div>
+                        <h4 style="font-weight: 700; margin-bottom: var(--space-2);">Sistema Robusto</h4>
+                        <p style="color: var(--text-muted); font-size: 0.875rem;">Zero perda de dados</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Analysis Type Selection -->
+            <section style="margin-bottom: var(--space-12);">
+                <div class="enhanced-form-container">
+                    <div class="form-section">
+                        <div class="section-header">
+                            <div class="section-icon">
+                                <i class="fas fa-layer-group"></i>
+                            </div>
+                            <div>
+                                <h3 class="section-title">Tipo de Análise</h3>
+                                <p class="section-subtitle">Selecione o tipo de análise desejado</p>
+                            </div>
+                        </div>
+                        
+                        <div class="analysis-type-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: var(--space-4);">
+                            <div class="analysis-type-card" data-type="complete" style="background: var(--bg-surface); border-radius: var(--radius-xl); padding: var(--space-6); border: 2px solid transparent; cursor: pointer; transition: all 0.3s ease;">
+                                <div style="display: flex; align-items: center; gap: var(--space-3); margin-bottom: var(--space-3);">
+                                    <div style="font-size: 2rem;">🚀</div>
+                                    <h4 style="font-weight: 700; color: var(--text-primary);">Análise Completa</h4>
+                                </div>
+                                <p style="color: var(--text-secondary); font-size: 0.875rem;">Todos os agentes + todas as capacidades</p>
+                            </div>
+                            
+                            <div class="analysis-type-card" data-type="archaeological" style="background: var(--bg-surface); border-radius: var(--radius-xl); padding: var(--space-6); border: 2px solid transparent; cursor: pointer; transition: all 0.3s ease;">
+                                <div style="display: flex; align-items: center; gap: var(--space-3); margin-bottom: var(--space-3);">
+                                    <div style="font-size: 2rem;">🔬</div>
+                                    <h4 style="font-weight: 700; color: var(--text-primary);">Arqueológica</h4>
+                                </div>
+                                <p style="color: var(--text-secondary); font-size: 0.875rem;">12 camadas de análise forense</p>
+                            </div>
+                            
+                            <div class="analysis-type-card" data-type="forensic_cpl" style="background: var(--bg-surface); border-radius: var(--radius-xl); padding: var(--space-6); border: 2px solid transparent; cursor: pointer; transition: all 0.3s ease;">
+                                <div style="display: flex; align-items: center; gap: var(--space-3); margin-bottom: var(--space-3);">
+                                    <div style="font-size: 2rem;">🎬</div>
+                                    <h4 style="font-weight: 700; color: var(--text-primary);">Forense CPL</h4>
+                                </div>
+                                <p style="color: var(--text-secondary); font-size: 0.875rem;">Análise forense de CPL/vídeo</p>
+                            </div>
+                            
+                            <div class="analysis-type-card" data-type="visceral_leads" style="background: var(--bg-surface); border-radius: var(--radius-xl); padding: var(--space-6); border: 2px solid transparent; cursor: pointer; transition: all 0.3s ease;">
+                                <div style="display: flex; align-items: center; gap: var(--space-3); margin-bottom: var(--space-3);">
+                                    <div style="font-size: 2rem;">🧠</div>
+                                    <h4 style="font-weight: 700; color: var(--text-primary);">Engenharia Reversa</h4>
+                                </div>
+                                <p style="color: var(--text-secondary); font-size: 0.875rem;">Análise visceral de leads</p>
+                            </div>
+                            
+                            <div class="analysis-type-card" data-type="pre_pitch" style="background: var(--bg-surface); border-radius: var(--radius-xl); padding: var(--space-6); border: 2px solid transparent; cursor: pointer; transition: all 0.3s ease;">
+                                <div style="display: flex; align-items: center; gap: var(--space-3); margin-bottom: var(--space-3);">
+                                    <div style="font-size: 2rem;">🎯</div>
+                                    <h4 style="font-weight: 700; color: var(--text-primary);">Pré-Pitch</h4>
+                                </div>
+                                <p style="color: var(--text-secondary); font-size: 0.875rem;">Orquestração psicológica</p>
+                            </div>
+                            
+                            <div class="analysis-type-card" data-type="standard" style="background: var(--bg-surface); border-radius: var(--radius-xl); padding: var(--space-6); border: 2px solid transparent; cursor: pointer; transition: all 0.3s ease;">
+                                <div style="display: flex; align-items: center; gap: var(--space-3); margin-bottom: var(--space-3);">
+                                    <div style="font-size: 2rem;">📊</div>
+                                    <h4 style="font-weight: 700; color: var(--text-primary);">Padrão</h4>
+                                </div>
+                                <p style="color: var(--text-secondary); font-size: 0.875rem;">Análise padrão unificada</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Unified Form -->
+            <section style="margin-bottom: var(--space-16);">
+                <div class="enhanced-form-container">
+                    <form id="unifiedAnalysisForm">
+                        <input type="hidden" id="analysisType" name="analysis_type" value="complete">
+                        
+                        <!-- Basic Information -->
+                        <div class="form-section">
+                            <div class="section-header">
+                                <div class="section-icon">
+                                    <i class="fas fa-info-circle"></i>
+                                </div>
+                                <div>
+                                    <h3 class="section-title">Informações do Projeto</h3>
+                                    <p class="section-subtitle">Dados básicos para análise unificada</p>
+                                </div>
+                            </div>
+                            
+                            <div class="input-group-enhanced">
+                                <label class="input-label-enhanced" for="segmento">Segmento de Mercado *</label>
+                                <input type="text" id="segmento" name="segmento" class="input-enhanced" required 
+                                       placeholder="Ex: Produtos Digitais, Consultoria, E-commerce, Saúde...">
+                            </div>
+                            
+                            <div class="grid-enhanced grid-2">
+                                <div class="input-group-enhanced">
+                                    <label class="input-label-enhanced" for="produto">Produto/Serviço</label>
+                                    <input type="text" id="produto" name="produto" class="input-enhanced"
+                                           placeholder="Nome do seu produto ou serviço">
+                                </div>
+                                
+                                <div class="input-group-enhanced">
+                                    <label class="input-label-enhanced" for="preco">Preço (R$)</label>
+                                    <input type="number" id="preco" name="preco" class="input-enhanced" step="0.01"
+                                           placeholder="997.00">
+                                </div>
+                            </div>
+                            
+                            <div class="input-group-enhanced">
+                                <label class="input-label-enhanced" for="publico">Público-Alvo Detalhado</label>
+                                <textarea id="publico" name="publico" class="input-enhanced textarea-enhanced" rows="4"
+                                          placeholder="Descreva detalhadamente seu público-alvo ideal..."></textarea>
+                            </div>
+                        </div>
+
+                        <!-- Conditional Fields Based on Analysis Type -->
+                        <div id="conditionalFields">
+                            <!-- Standard/Complete Fields -->
+                            <div class="conditional-section" data-types="complete,standard,archaeological">
+                                <div class="form-section">
+                                    <div class="section-header">
+                                        <div class="section-icon">
+                                            <i class="fas fa-search-plus"></i>
+                                        </div>
+                                        <div>
+                                            <h3 class="section-title">Pesquisa Unificada</h3>
+                                            <p class="section-subtitle">Exa + Google + Serper + PyMuPDF Pro</p>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="input-group-enhanced">
+                                        <label class="input-label-enhanced" for="query">Query de Pesquisa</label>
+                                        <input type="text" id="query" name="query" class="input-enhanced"
+                                               placeholder="Ex: mercado telemedicina Brasil 2024 tendências">
+                                        <div class="alert-enhanced alert-info mt-2">
+                                            <i class="fas fa-rocket"></i>
+                                            <div>
+                                                <strong>Pesquisa Neural Avançada</strong>
+                                                <p>Exa fará busca neural enquanto outros provedores coletam dados complementares.</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- CPL Forensic Fields -->
+                            <div class="conditional-section" data-types="forensic_cpl" style="display: none;">
+                                <div class="form-section">
+                                    <div class="section-header">
+                                        <div class="section-icon">
+                                            <i class="fas fa-film"></i>
+                                        </div>
+                                        <div>
+                                            <h3 class="section-title">Análise Forense de CPL</h3>
+                                            <p class="section-subtitle">Transcrição e contexto estratégico</p>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="input-group-enhanced">
+                                        <label class="input-label-enhanced" for="transcription">Transcrição Completa do CPL *</label>
+                                        <textarea id="transcription" name="transcription" class="input-enhanced textarea-enhanced" rows="8"
+                                                  placeholder="Cole aqui a transcrição completa do seu CPL/vídeo..."></textarea>
+                                    </div>
+                                    
+                                    <div class="grid-enhanced grid-2">
+                                        <div class="input-group-enhanced">
+                                            <label class="input-label-enhanced" for="contexto_estrategico">Contexto Estratégico</label>
+                                            <select id="contexto_estrategico" name="contexto_estrategico" class="input-enhanced">
+                                                <option value="">Selecione...</option>
+                                                <option value="Primeiro contato">Primeiro contato</option>
+                                                <option value="Aquecimento">Aquecimento</option>
+                                                <option value="Pré-lançamento">Pré-lançamento</option>
+                                                <option value="Lançamento">Lançamento</option>
+                                            </select>
+                                        </div>
+                                        
+                                        <div class="input-group-enhanced">
+                                            <label class="input-label-enhanced" for="objetivo_cpl">Objetivo do CPL</label>
+                                            <select id="objetivo_cpl" name="objetivo_cpl" class="input-enhanced">
+                                                <option value="">Selecione...</option>
+                                                <option value="Educar">Educar</option>
+                                                <option value="Aquecer">Aquecer</option>
+                                                <option value="Vender">Vender</option>
+                                                <option value="Converter">Converter</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Visceral Leads Fields -->
+                            <div class="conditional-section" data-types="visceral_leads" style="display: none;">
+                                <div class="form-section">
+                                    <div class="section-header">
+                                        <div class="section-icon">
+                                            <i class="fas fa-users"></i>
+                                        </div>
+                                        <div>
+                                            <h3 class="section-title">Engenharia Reversa de Leads</h3>
+                                            <p class="section-subtitle">Dados de pesquisa para análise visceral</p>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="input-group-enhanced">
+                                        <label class="input-label-enhanced" for="leads_data">Dados dos Leads *</label>
+                                        <textarea id="leads_data" name="leads_data" class="input-enhanced textarea-enhanced" rows="8"
+                                                  placeholder="Cole aqui os dados da pesquisa com leads (respostas, comentários, etc.)..."></textarea>
+                                    </div>
+                                    
+                                    <div class="grid-enhanced grid-2">
+                                        <div class="input-group-enhanced">
+                                            <label class="input-label-enhanced" for="produto_servico">Produto/Serviço *</label>
+                                            <input type="text" id="produto_servico" name="produto_servico" class="input-enhanced"
+                                                   placeholder="Produto ou serviço analisado">
+                                        </div>
+                                        
+                                        <div class="input-group-enhanced">
+                                            <label class="input-label-enhanced" for="numero_respostas">Número de Respostas</label>
+                                            <input type="number" id="numero_respostas" name="numero_respostas" class="input-enhanced"
+                                                   placeholder="100">
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="input-group-enhanced">
+                                        <label class="input-label-enhanced" for="principais_perguntas">Principais Perguntas da Pesquisa *</label>
+                                        <textarea id="principais_perguntas" name="principais_perguntas" class="input-enhanced textarea-enhanced" rows="3"
+                                                  placeholder="Liste as principais perguntas feitas na pesquisa..."></textarea>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Pre-Pitch Fields -->
+                            <div class="conditional-section" data-types="pre_pitch" style="display: none;">
+                                <div class="form-section">
+                                    <div class="section-header">
+                                        <div class="section-icon">
+                                            <i class="fas fa-theater-masks"></i>
+                                        </div>
+                                        <div>
+                                            <h3 class="section-title">Orquestração de Pré-Pitch</h3>
+                                            <p class="section-subtitle">Sinfonia de tensão psicológica</p>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="input-group-enhanced">
+                                        <label class="input-label-enhanced" for="event_structure">Estrutura do Evento *</label>
+                                        <textarea id="event_structure" name="event_structure" class="input-enhanced textarea-enhanced" rows="4"
+                                                  placeholder="Descreva a estrutura do evento/lançamento..."></textarea>
+                                    </div>
+                                    
+                                    <div class="input-group-enhanced">
+                                        <label class="input-label-enhanced" for="product_offer">Produto e Oferta *</label>
+                                        <textarea id="product_offer" name="product_offer" class="input-enhanced textarea-enhanced" rows="4"
+                                                  placeholder="Detalhe o produto e a oferta completa..."></textarea>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Advanced Options -->
+                        <div class="form-section">
+                            <div class="section-header">
+                                <div class="section-icon">
+                                    <i class="fas fa-cogs"></i>
+                                </div>
+                                <div>
+                                    <h3 class="section-title">Opções Avançadas</h3>
+                                    <p class="section-subtitle">Configurações para análise unificada</p>
+                                </div>
+                            </div>
+                            
+                            <div class="grid-enhanced grid-2">
+                                <div class="input-group-enhanced">
+                                    <label class="input-label-enhanced" for="objetivo_receita">Objetivo de Receita (R$)</label>
+                                    <input type="number" id="objetivo_receita" name="objetivo_receita" class="input-enhanced" step="0.01"
+                                           placeholder="100000.00">
+                                </div>
+                                
+                                <div class="input-group-enhanced">
+                                    <label class="input-label-enhanced" for="orcamento_marketing">Orçamento Marketing (R$)</label>
+                                    <input type="number" id="orcamento_marketing" name="orcamento_marketing" class="input-enhanced" step="0.01"
+                                           placeholder="10000.00">
+                                </div>
+                            </div>
+                            
+                            <div class="input-group-enhanced">
+                                <label class="input-label-enhanced" for="dados_adicionais">Dados Adicionais</label>
+                                <textarea id="dados_adicionais" name="dados_adicionais" class="input-enhanced textarea-enhanced" rows="4"
+                                          placeholder="Adicione qualquer informação relevante..."></textarea>
+                            </div>
+                        </div>
+
+                        <!-- File Upload -->
+                        <div class="form-section">
+                            <div class="section-header">
+                                <div class="section-icon">
+                                    <i class="fas fa-paperclip"></i>
+                                </div>
+                                <div>
+                                    <h3 class="section-title">Anexos Inteligentes</h3>
+                                    <p class="section-subtitle">PDF com PyMuPDF Pro + outros formatos</p>
+                                </div>
+                            </div>
+                            
+                            <div class="upload-area" id="uploadArea">
+                                <div class="upload-content">
+                                    <i class="fas fa-cloud-upload-alt"></i>
+                                    <h4>Upload Unificado com PyMuPDF Pro</h4>
+                                    <p>PDF (PyMuPDF Pro), DOC, XLSX, CSV, TXT • Máximo 50MB por arquivo</p>
+                                    <input type="file" id="fileInput" multiple accept=".pdf,.doc,.docx,.xlsx,.xls,.csv,.txt,.json">
+                                </div>
+                            </div>
+                            
+                            <div class="uploaded-files" id="uploadedFiles"></div>
+                        </div>
+
+                        <!-- Submit Button -->
+                        <div style="text-align: center; padding-top: var(--space-8); border-top: 1px solid var(--bg-tertiary);">
+                            <button type="submit" class="btn-primary-enhanced" style="font-size: 1.125rem; padding: var(--space-5) var(--space-10);">
+                                <i class="fas fa-rocket"></i>
+                                <span id="submitButtonText">Iniciar Análise Completa Unificada</span>
+                            </button>
+                            
+                            <p style="color: var(--text-muted); font-size: 0.875rem; margin-top: var(--space-4);">
+                                🔍 Exa Neural Search • 📄 PyMuPDF Pro • 🧠 6 Agentes • 🛡️ Sistema Ultra-Robusto
+                            </p>
+                        </div>
+                    </form>
+                </div>
+            </section>
+
+            <!-- Enhanced Progress -->
+            <section id="progressArea" style="display: none; margin-bottom: var(--space-16);">
+                <div class="progress-enhanced">
+                    <div class="progress-header-enhanced">
+                        <h3 class="progress-title-enhanced">🚀 Análise Unificada em Progresso</h3>
+                        <p class="progress-subtitle-enhanced">Sistema unificado processando com todas as capacidades</p>
+                    </div>
+                    
+                    <div class="progress-bar-enhanced">
+                        <div class="progress-fill-enhanced" style="width: 0%;"></div>
+                    </div>
+                    
+                    <div class="progress-info-enhanced">
+                        <div>
+                            <span id="currentStepUnified">Iniciando análise unificada...</span>
+                        </div>
+                        <div style="display: flex; gap: var(--space-4); font-size: 0.875rem;">
+                            <span>Etapa: <span id="stepCounterUnified">0/10</span></span>
+                            <span>Tempo restante: <span id="estimatedTimeUnified">--:--</span></span>
+                        </div>
+                    </div>
+                    
+                    <div class="grid-enhanced grid-4" style="margin-top: var(--space-6);">
+                        <div style="display: flex; align-items: center; gap: var(--space-3); padding: var(--space-3); background: var(--bg-surface); border-radius: var(--radius-md);">
+                            <i class="fas fa-search" style="color: var(--accent-primary);"></i>
+                            <span style="font-size: 0.875rem;">Exa Neural Search</span>
+                        </div>
+                        <div style="display: flex; align-items: center; gap: var(--space-3); padding: var(--space-3); background: var(--bg-surface); border-radius: var(--radius-md);">
+                            <i class="fas fa-file-pdf" style="color: var(--accent-secondary);"></i>
+                            <span style="font-size: 0.875rem;">PyMuPDF Pro</span>
+                        </div>
+                        <div style="display: flex; align-items: center; gap: var(--space-3); padding: var(--space-3); background: var(--bg-surface); border-radius: var(--radius-md);">
+                            <i class="fas fa-brain" style="color: var(--accent-warning);"></i>
+                            <span style="font-size: 0.875rem;">Agentes Psicológicos</span>
+                        </div>
+                        <div style="display: flex; align-items: center; gap: var(--space-3); padding: var(--space-3); background: var(--bg-surface); border-radius: var(--radius-md);">
+                            <i class="fas fa-shield-check" style="color: var(--accent-success);"></i>
+                            <span style="font-size: 0.875rem;">Sistema Robusto</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Unified Results Area -->
+            <section id="unifiedResultsArea" style="display: none;">
+                <!-- Será preenchido dinamicamente -->
+            </section>
+
+            <!-- System Diagnostics -->
+            <section style="margin-top: var(--space-16);">
+                <div class="enhanced-form-container">
+                    <div class="form-section">
+                        <div class="section-header">
+                            <div class="section-icon">
+                                <i class="fas fa-diagnostics"></i>
+                            </div>
+                            <div>
+                                <h3 class="section-title">Diagnóstico do Sistema Unificado</h3>
+                                <p class="section-subtitle">Teste todas as capacidades integradas</p>
+                            </div>
+                        </div>
+                        
+                        <div class="grid-enhanced grid-3" style="gap: var(--space-3);">
+                            <button type="button" class="btn-secondary-enhanced" onclick="testExa()">
+                                <i class="fas fa-search"></i> Testar Exa
+                            </button>
+                            <button type="button" class="btn-secondary-enhanced" onclick="testPyMuPDF()">
+                                <i class="fas fa-file-pdf"></i> Testar PyMuPDF
+                            </button>
+                            <button type="button" class="btn-secondary-enhanced" onclick="getSystemStatus()">
+                                <i class="fas fa-heartbeat"></i> Status Sistema
+                            </button>
+                            <button type="button" class="btn-secondary-enhanced" onclick="testUnifiedSearch()">
+                                <i class="fas fa-globe"></i> Busca Unificada
+                            </button>
+                            <button type="button" class="btn-secondary-enhanced" onclick="resetSystem()">
+                                <i class="fas fa-refresh"></i> Reset Sistema
+                            </button>
+                            <button type="button" class="btn-secondary-enhanced" onclick="getCapabilities()">
+                                <i class="fas fa-list"></i> Capacidades
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <!-- Enhanced Scripts -->
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/upload.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/unified_analysis.js') }}"></script>
+    
+    <script>
+        // Analysis type selection
+        document.addEventListener('DOMContentLoaded', function() {
+            const typeCards = document.querySelectorAll('.analysis-type-card');
+            const conditionalSections = document.querySelectorAll('.conditional-section');
+            const analysisTypeInput = document.getElementById('analysisType');
+            const submitButton = document.getElementById('submitButtonText');
+            
+            // Seleciona tipo padrão
+            selectAnalysisType('complete');
+            
+            typeCards.forEach(card => {
+                card.addEventListener('click', function() {
+                    const type = this.dataset.type;
+                    selectAnalysisType(type);
+                });
+            });
+            
+            function selectAnalysisType(type) {
+                // Remove seleção anterior
+                typeCards.forEach(card => {
+                    card.style.borderColor = 'transparent';
+                    card.style.background = 'var(--bg-surface)';
+                });
+                
+                // Seleciona novo tipo
+                const selectedCard = document.querySelector(`[data-type="${type}"]`);
+                if (selectedCard) {
+                    selectedCard.style.borderColor = 'var(--accent-primary)';
+                    selectedCard.style.background = 'var(--bg-elevated)';
+                }
+                
+                // Atualiza input hidden
+                analysisTypeInput.value = type;
+                
+                // Mostra/esconde seções condicionais
+                conditionalSections.forEach(section => {
+                    const types = section.dataset.types.split(',');
+                    if (types.includes(type)) {
+                        section.style.display = 'block';
+                    } else {
+                        section.style.display = 'none';
+                    }
+                });
+                
+                // Atualiza texto do botão
+                const typeNames = {
+                    'complete': 'Análise Completa Unificada',
+                    'archaeological': 'Análise Arqueológica',
+                    'forensic_cpl': 'Análise Forense de CPL',
+                    'visceral_leads': 'Engenharia Reversa de Leads',
+                    'pre_pitch': 'Orquestração de Pré-Pitch',
+                    'standard': 'Análise Padrão Unificada'
+                };
+                
+                submitButton.textContent = `Iniciar ${typeNames[type] || 'Análise'}`;
+            }
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,1148 @@
+/* ARQV30 Enhanced v2.0 - Archaeological UI Styles */
+
+/* Enhanced Archaeological Color Palette */
+:root {
+    /* Archaeological Theme Colors */
+    --archaeological-primary: #0ea5e9;
+    --archaeological-secondary: #8b5cf6;
+    --archaeological-accent: #10b981;
+    --archaeological-warning: #f59e0b;
+    --archaeological-danger: #ef4444;
+    
+    /* Visceral Colors */
+    --visceral-wounds: #ef4444;
+    --visceral-dreams: #f59e0b;
+    --visceral-demons: #8b5cf6;
+    --visceral-dialect: #10b981;
+    
+    /* Forensic Colors */
+    --forensic-density: #0ea5e9;
+    --forensic-intensity: #ef4444;
+    --forensic-coverage: #10b981;
+    --forensic-timing: #f59e0b;
+    
+    /* Background Layers */
+    --bg-archaeological: #0a0a0a;
+    --bg-excavation: #111111;
+    --bg-artifact: #1a1a1a;
+    --bg-discovery: #1e1e1e;
+    --bg-analysis: #262626;
+    
+    /* Text Archaeological */
+    --text-archaeological: #ffffff;
+    --text-discovery: #d4d4d4;
+    --text-artifact: #a3a3a3;
+    --text-excavation: #737373;
+    
+    /* Shadows Archaeological */
+    --shadow-excavation: 0 4px 6px rgba(0, 0, 0, 0.3);
+    --shadow-discovery: 0 10px 15px rgba(0, 0, 0, 0.4);
+    --shadow-artifact: 0 20px 25px rgba(0, 0, 0, 0.5);
+    --shadow-forensic: 0 25px 50px rgba(14, 165, 233, 0.2);
+}
+
+/* Archaeological Base Styles */
+.archaeological-container {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 1.5rem;
+}
+
+.archaeological-section {
+    background: linear-gradient(145deg, var(--bg-artifact), var(--bg-analysis));
+    border-radius: 2rem;
+    padding: 3rem;
+    margin-bottom: 3rem;
+    border: 1px solid var(--bg-analysis);
+    box-shadow: var(--shadow-discovery);
+    position: relative;
+    overflow: hidden;
+}
+
+.archaeological-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, var(--archaeological-primary), var(--archaeological-secondary), var(--archaeological-accent));
+}
+
+/* Agent Cards */
+.agent-card-archaeological {
+    background: var(--bg-discovery);
+    border-radius: 1.5rem;
+    padding: 2rem;
+    margin: 1rem 0;
+    border-left: 4px solid var(--archaeological-primary);
+    transition: all 0.3s ease;
+    position: relative;
+}
+
+.agent-card-archaeological:hover {
+    background: var(--bg-analysis);
+    transform: translateX(8px);
+    box-shadow: var(--shadow-discovery);
+}
+
+.agent-header-archaeological {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
+.agent-name-archaeological {
+    font-size: 1.125rem;
+    font-weight: 700;
+    color: var(--archaeological-primary);
+    margin: 0;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.agent-status-badge {
+    background: rgba(14, 165, 233, 0.1);
+    color: var(--archaeological-primary);
+    padding: 0.25rem 0.75rem;
+    border-radius: 1rem;
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    border: 1px solid rgba(14, 165, 233, 0.2);
+}
+
+.agent-mission-archaeological {
+    color: var(--text-discovery);
+    font-size: 0.875rem;
+    line-height: 1.5;
+    margin-bottom: 1rem;
+}
+
+.agent-specialties {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+}
+
+.specialty-tag-archaeological {
+    background: var(--bg-analysis);
+    color: var(--archaeological-secondary);
+    padding: 0.25rem 0.75rem;
+    border-radius: 0.5rem;
+    font-size: 0.75rem;
+    font-weight: 500;
+    border: 1px solid var(--archaeological-secondary);
+}
+
+/* Visceral Avatar Styles */
+.visceral-avatar-archaeological {
+    background: linear-gradient(145deg, var(--bg-artifact), var(--bg-discovery));
+    border-radius: 2rem;
+    padding: 2.5rem;
+    margin: 2rem 0;
+    border: 1px solid var(--bg-analysis);
+    position: relative;
+}
+
+.avatar-identity-archaeological {
+    text-align: center;
+    margin-bottom: 2rem;
+    padding: 2rem;
+    background: var(--bg-excavation);
+    border-radius: 1.5rem;
+    border: 1px solid var(--bg-artifact);
+}
+
+.avatar-name-archaeological {
+    font-size: 2rem;
+    font-weight: 800;
+    color: var(--archaeological-primary);
+    margin-bottom: 0.5rem;
+}
+
+.avatar-subtitle-archaeological {
+    color: var(--text-artifact);
+    font-size: 1rem;
+}
+
+/* Visceral Tabs */
+.visceral-tabs-archaeological {
+    margin: 2rem 0;
+}
+
+.tab-navigation-archaeological {
+    display: flex;
+    gap: 0.5rem;
+    margin-bottom: 2rem;
+    background: var(--bg-excavation);
+    padding: 0.5rem;
+    border-radius: 1rem;
+}
+
+.tab-button-archaeological {
+    flex: 1;
+    padding: 1rem;
+    background: transparent;
+    color: var(--text-artifact);
+    border: none;
+    border-radius: 0.75rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-size: 0.875rem;
+}
+
+.tab-button-archaeological.active {
+    background: var(--archaeological-primary);
+    color: white;
+    box-shadow: var(--shadow-excavation);
+}
+
+.tab-button-archaeological:hover:not(.active) {
+    background: var(--bg-artifact);
+    color: var(--text-discovery);
+}
+
+.tab-content-archaeological {
+    display: none;
+    animation: fadeInArchaeological 0.3s ease-out;
+}
+
+.tab-content-archaeological.active {
+    display: block;
+}
+
+/* Wounds, Dreams, Demons Lists */
+.psychological-list-archaeological {
+    display: grid;
+    gap: 0.75rem;
+}
+
+.psychological-item-archaeological {
+    display: flex;
+    align-items: flex-start;
+    gap: 1rem;
+    padding: 1.25rem;
+    background: var(--bg-discovery);
+    border-radius: 1rem;
+    transition: all 0.3s ease;
+    border-left: 3px solid var(--archaeological-primary);
+}
+
+.psychological-item-archaeological:hover {
+    background: var(--bg-analysis);
+    transform: translateX(4px);
+}
+
+.psychological-number {
+    background: var(--archaeological-primary);
+    color: white;
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: 0.875rem;
+    flex-shrink: 0;
+}
+
+.psychological-text {
+    flex: 1;
+    color: var(--text-archaeological);
+    line-height: 1.6;
+    font-weight: 500;
+}
+
+/* Wounds specific */
+.wound-item-archaeological {
+    border-left-color: var(--visceral-wounds);
+}
+
+.wound-item-archaeological .psychological-number {
+    background: var(--visceral-wounds);
+}
+
+/* Dreams specific */
+.dream-item-archaeological {
+    border-left-color: var(--visceral-dreams);
+}
+
+.dream-item-archaeological .psychological-number {
+    background: var(--visceral-dreams);
+}
+
+/* Demons specific */
+.demon-item-archaeological {
+    border-left-color: var(--visceral-demons);
+}
+
+.demon-item-archaeological .psychological-number {
+    background: var(--visceral-demons);
+}
+
+/* Drivers Arsenal */
+.drivers-arsenal-archaeological {
+    background: var(--bg-artifact);
+    border-radius: 2rem;
+    padding: 2.5rem;
+    margin: 2rem 0;
+    border: 1px solid var(--bg-analysis);
+}
+
+.drivers-grid-archaeological {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+    gap: 2rem;
+    margin-top: 2rem;
+}
+
+.driver-card-archaeological {
+    background: var(--bg-discovery);
+    border-radius: 1.5rem;
+    padding: 2rem;
+    border: 1px solid var(--bg-analysis);
+    transition: all 0.3s ease;
+    position: relative;
+}
+
+.driver-card-archaeological:hover {
+    border-color: var(--archaeological-secondary);
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-discovery);
+}
+
+.driver-header-archaeological {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.5rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid var(--bg-analysis);
+}
+
+.driver-name-archaeological {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: var(--archaeological-secondary);
+    margin: 0;
+}
+
+.driver-priority-badge {
+    background: rgba(139, 92, 246, 0.1);
+    color: var(--archaeological-secondary);
+    padding: 0.25rem 0.75rem;
+    border-radius: 1rem;
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    border: 1px solid rgba(139, 92, 246, 0.2);
+}
+
+.driver-content-archaeological {
+    space-y: 1rem;
+}
+
+.driver-element {
+    margin-bottom: 1rem;
+}
+
+.driver-element strong {
+    color: var(--archaeological-accent);
+    display: block;
+    margin-bottom: 0.5rem;
+    font-size: 0.875rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.driver-script-archaeological {
+    background: var(--bg-excavation);
+    padding: 1.5rem;
+    border-radius: 1rem;
+    border-left: 3px solid var(--archaeological-primary);
+    margin: 1rem 0;
+}
+
+.script-step-archaeological {
+    margin-bottom: 1rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid var(--bg-artifact);
+}
+
+.script-step-archaeological:last-child {
+    border-bottom: none;
+    margin-bottom: 0;
+}
+
+.anchor-phrase-archaeological {
+    background: var(--bg-analysis);
+    padding: 0.75rem 1rem;
+    border-radius: 0.75rem;
+    margin: 0.5rem 0;
+    font-style: italic;
+    color: var(--text-discovery);
+    border-left: 2px solid var(--archaeological-warning);
+    position: relative;
+}
+
+.anchor-phrase-archaeological::before {
+    content: '"';
+    position: absolute;
+    left: 0.5rem;
+    top: 0.25rem;
+    font-size: 1.5rem;
+    color: var(--archaeological-warning);
+    font-weight: 700;
+}
+
+.anchor-phrase-archaeological::after {
+    content: '"';
+    position: absolute;
+    right: 0.5rem;
+    bottom: 0.25rem;
+    font-size: 1.5rem;
+    color: var(--archaeological-warning);
+    font-weight: 700;
+}
+
+/* PROVIs Arsenal */
+.provis-arsenal-archaeological {
+    background: var(--bg-artifact);
+    border-radius: 2rem;
+    padding: 2.5rem;
+    margin: 2rem 0;
+    border: 1px solid var(--bg-analysis);
+}
+
+.provis-showcase-archaeological {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(450px, 1fr));
+    gap: 2rem;
+    margin-top: 2rem;
+}
+
+.provi-card-archaeological {
+    background: linear-gradient(145deg, var(--bg-discovery), var(--bg-analysis));
+    border-radius: 1.5rem;
+    padding: 2rem;
+    border: 1px solid var(--bg-analysis);
+    position: relative;
+    transition: all 0.3s ease;
+}
+
+.provi-card-archaeological::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, var(--archaeological-warning), var(--archaeological-accent));
+    border-radius: 1.5rem 1.5rem 0 0;
+}
+
+.provi-card-archaeological:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-artifact);
+}
+
+.provi-header-archaeological {
+    margin-bottom: 1.5rem;
+}
+
+.provi-name-archaeological {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: var(--archaeological-warning);
+    margin-bottom: 0.5rem;
+}
+
+.provi-category-badge {
+    background: rgba(245, 158, 11, 0.1);
+    color: var(--archaeological-warning);
+    padding: 0.25rem 0.75rem;
+    border-radius: 1rem;
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    border: 1px solid rgba(245, 158, 11, 0.2);
+}
+
+.provi-objective-archaeological {
+    background: var(--bg-excavation);
+    padding: 1.5rem;
+    border-radius: 1rem;
+    margin: 1rem 0;
+    border-left: 3px solid var(--archaeological-accent);
+}
+
+.provi-experiment-archaeological {
+    background: var(--bg-excavation);
+    padding: 1.5rem;
+    border-radius: 1rem;
+    margin: 1rem 0;
+    border-left: 3px solid var(--archaeological-primary);
+}
+
+.provi-materials-archaeological {
+    margin-top: 1.5rem;
+}
+
+.material-item-archaeological {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.75rem;
+    background: var(--bg-excavation);
+    border-radius: 0.75rem;
+    margin: 0.5rem 0;
+    border: 1px solid var(--bg-artifact);
+}
+
+.material-name {
+    font-weight: 600;
+    color: var(--text-archaeological);
+}
+
+.material-spec {
+    color: var(--text-discovery);
+    font-size: 0.875rem;
+}
+
+/* Forensic Metrics */
+.forensic-metrics-archaeological {
+    background: var(--bg-artifact);
+    border-radius: 2rem;
+    padding: 2.5rem;
+    margin: 2rem 0;
+    border: 1px solid var(--bg-analysis);
+}
+
+.forensic-grid-archaeological {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1.5rem;
+    margin: 2rem 0;
+}
+
+.forensic-metric-archaeological {
+    background: var(--bg-discovery);
+    padding: 2rem;
+    border-radius: 1.5rem;
+    text-align: center;
+    border: 1px solid var(--bg-analysis);
+    transition: all 0.3s ease;
+}
+
+.forensic-metric-archaeological:hover {
+    border-color: var(--forensic-density);
+    transform: translateY(-2px);
+}
+
+.forensic-value-archaeological {
+    font-size: 2.5rem;
+    font-weight: 800;
+    color: var(--forensic-density);
+    margin-bottom: 0.5rem;
+    font-family: 'JetBrains Mono', monospace;
+}
+
+.forensic-label-archaeological {
+    font-size: 0.75rem;
+    color: var(--text-artifact);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    font-weight: 600;
+}
+
+/* Cialdini Triggers */
+.cialdini-triggers-archaeological {
+    margin: 2rem 0;
+}
+
+.cialdini-trigger-archaeological {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 1rem;
+    background: var(--bg-discovery);
+    border-radius: 1rem;
+    margin: 0.75rem 0;
+    border: 1px solid var(--bg-analysis);
+}
+
+.cialdini-name-archaeological {
+    min-width: 120px;
+    font-weight: 600;
+    color: var(--text-archaeological);
+    font-size: 0.875rem;
+    text-transform: uppercase;
+}
+
+.cialdini-bar-archaeological {
+    flex: 1;
+    height: 8px;
+    background: var(--bg-excavation);
+    border-radius: 1rem;
+    overflow: hidden;
+    position: relative;
+}
+
+.cialdini-fill-archaeological {
+    height: 100%;
+    background: linear-gradient(90deg, var(--archaeological-primary), var(--archaeological-secondary));
+    border-radius: 1rem;
+    transition: width 0.5s ease;
+}
+
+.cialdini-value-archaeological {
+    min-width: 40px;
+    text-align: center;
+    font-weight: 700;
+    color: var(--archaeological-primary);
+    font-family: 'JetBrains Mono', monospace;
+}
+
+/* Emotional Intensity */
+.emotional-intensity-archaeological {
+    margin: 2rem 0;
+}
+
+.emotion-bar-archaeological {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 1rem;
+    background: var(--bg-discovery);
+    border-radius: 1rem;
+    margin: 0.75rem 0;
+    border: 1px solid var(--bg-analysis);
+}
+
+.emotion-name-archaeological {
+    min-width: 100px;
+    font-weight: 600;
+    color: var(--text-archaeological);
+    font-size: 0.875rem;
+    text-transform: uppercase;
+}
+
+.emotion-track-archaeological {
+    flex: 1;
+    height: 10px;
+    background: var(--bg-excavation);
+    border-radius: 1rem;
+    overflow: hidden;
+}
+
+.emotion-fill-archaeological {
+    height: 100%;
+    border-radius: 1rem;
+    transition: width 0.5s ease;
+}
+
+.emotion-fill-archaeological.medo {
+    background: linear-gradient(90deg, var(--visceral-wounds), #dc2626);
+}
+
+.emotion-fill-archaeological.desejo {
+    background: linear-gradient(90deg, var(--visceral-dreams), #d97706);
+}
+
+.emotion-fill-archaeological.urgencia {
+    background: linear-gradient(90deg, var(--archaeological-warning), #ea580c);
+}
+
+.emotion-fill-archaeological.aspiracao {
+    background: linear-gradient(90deg, var(--archaeological-accent), #059669);
+}
+
+.emotion-value-archaeological {
+    min-width: 50px;
+    text-align: center;
+    font-weight: 700;
+    font-family: 'JetBrains Mono', monospace;
+    color: var(--text-archaeological);
+}
+
+/* Anti-Objection System */
+.anti-objection-archaeological {
+    background: var(--bg-artifact);
+    border-radius: 2rem;
+    padding: 2.5rem;
+    margin: 2rem 0;
+    border: 1px solid var(--bg-analysis);
+}
+
+.objection-type-archaeological {
+    background: var(--bg-discovery);
+    padding: 1.5rem;
+    border-radius: 1rem;
+    margin: 1rem 0;
+    border-left: 4px solid var(--archaeological-accent);
+}
+
+.objection-title-archaeological {
+    font-size: 1.125rem;
+    font-weight: 700;
+    color: var(--archaeological-accent);
+    margin-bottom: 0.75rem;
+}
+
+.objection-description-archaeological {
+    color: var(--text-discovery);
+    line-height: 1.5;
+}
+
+/* Emergency Arsenal */
+.emergency-arsenal-archaeological {
+    margin: 2rem 0;
+}
+
+.emergency-item-archaeological {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 1rem;
+    background: var(--bg-discovery);
+    border-radius: 1rem;
+    margin: 0.75rem 0;
+    border-left: 3px solid var(--archaeological-danger);
+    transition: all 0.3s ease;
+}
+
+.emergency-item-archaeological:hover {
+    background: var(--bg-analysis);
+    transform: translateX(4px);
+}
+
+.emergency-icon-archaeological {
+    color: var(--archaeological-danger);
+    font-size: 1.25rem;
+}
+
+.emergency-text-archaeological {
+    flex: 1;
+    color: var(--text-archaeological);
+    font-weight: 500;
+    font-style: italic;
+}
+
+/* Research Results Enhanced */
+.research-results-archaeological {
+    background: var(--bg-artifact);
+    border-radius: 2rem;
+    padding: 2.5rem;
+    margin: 2rem 0;
+    border: 1px solid var(--bg-analysis);
+}
+
+.research-stats-archaeological {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 1.5rem;
+    margin: 2rem 0;
+}
+
+.research-stat-archaeological {
+    background: var(--bg-discovery);
+    padding: 1.5rem;
+    border-radius: 1rem;
+    text-align: center;
+    border: 1px solid var(--bg-analysis);
+}
+
+.research-stat-value {
+    font-size: 2rem;
+    font-weight: 800;
+    color: var(--archaeological-primary);
+    margin-bottom: 0.5rem;
+    font-family: 'JetBrains Mono', monospace;
+}
+
+.research-stat-label {
+    font-size: 0.75rem;
+    color: var(--text-artifact);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+}
+
+/* Data Quality Guarantee */
+.data-quality-archaeological {
+    background: rgba(16, 185, 129, 0.1);
+    border: 1px solid rgba(16, 185, 129, 0.2);
+    border-radius: 1rem;
+    padding: 1.5rem;
+    margin: 2rem 0;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.quality-icon-archaeological {
+    font-size: 2rem;
+    color: var(--archaeological-accent);
+}
+
+.quality-text-archaeological {
+    flex: 1;
+}
+
+.quality-title-archaeological {
+    font-weight: 700;
+    color: var(--archaeological-accent);
+    margin-bottom: 0.25rem;
+}
+
+.quality-description-archaeological {
+    color: var(--text-discovery);
+    font-size: 0.875rem;
+}
+
+/* Responsive Archaeological */
+@media (max-width: 1024px) {
+    .archaeological-section {
+        padding: 2rem;
+        margin-bottom: 2rem;
+    }
+    
+    .drivers-grid-archaeological {
+        grid-template-columns: 1fr;
+    }
+    
+    .provis-showcase-archaeological {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 768px) {
+    .archaeological-container {
+        padding: 0 1rem;
+    }
+    
+    .archaeological-section {
+        padding: 1.5rem;
+    }
+    
+    .tab-navigation-archaeological {
+        flex-direction: column;
+        gap: 0.25rem;
+    }
+    
+    .forensic-grid-archaeological {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .research-stats-archaeological {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+/* Animations */
+@keyframes fadeInArchaeological {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes pulseArchaeological {
+    0%, 100% {
+        opacity: 1;
+    }
+    50% {
+        opacity: 0.7;
+    }
+}
+
+@keyframes shimmerArchaeological {
+    0% {
+        transform: translateX(-100%);
+    }
+    100% {
+        transform: translateX(100%);
+    }
+}
+
+/* Loading States */
+.loading-archaeological {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 3rem;
+    color: var(--text-artifact);
+}
+
+.spinner-archaeological {
+    width: 40px;
+    height: 40px;
+    border: 3px solid var(--bg-analysis);
+    border-top: 3px solid var(--archaeological-primary);
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    margin-right: 1rem;
+}
+
+/* Interactive Elements */
+.interactive-archaeological {
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.interactive-archaeological:hover {
+    transform: scale(1.02);
+}
+
+/* Copy Button */
+.copy-button-archaeological {
+    background: var(--bg-analysis);
+    border: 1px solid var(--archaeological-primary);
+    color: var(--archaeological-primary);
+    padding: 0.5rem 1rem;
+    border-radius: 0.5rem;
+    cursor: pointer;
+    font-size: 0.75rem;
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+
+.copy-button-archaeological:hover {
+    background: var(--archaeological-primary);
+    color: white;
+}
+
+/* Forensic Interface Specific Styles */
+.tab-content-forensic {
+    display: none;
+    animation: fadeInArchaeological 0.3s ease-out;
+}
+
+.tab-content-forensic.active {
+    display: block;
+}
+
+.drivers-grid-selection {
+    max-height: 400px;
+    overflow-y: auto;
+    border: 1px solid var(--bg-analysis);
+    border-radius: var(--radius-xl);
+    padding: var(--spacing-4);
+    background: var(--bg-excavation);
+}
+
+.driver-card-selection {
+    background: var(--bg-discovery);
+    border-radius: var(--radius-lg);
+    border: 1px solid var(--bg-analysis);
+    margin: var(--spacing-3) 0;
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+.driver-card-selection:hover {
+    border-color: var(--archaeological-primary);
+    transform: translateX(4px);
+    background: var(--bg-analysis);
+}
+
+.driver-card-selection label {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-3);
+    padding: var(--spacing-4);
+    cursor: pointer;
+    margin: 0;
+}
+
+.driver-checkbox {
+    margin: 0;
+    transform: scale(1.2);
+}
+
+.driver-name {
+    font-weight: 600;
+    color: var(--text-archaeological);
+    font-size: var(--font-size-base);
+}
+
+.driver-category {
+    font-size: var(--font-size-sm);
+    color: var(--text-artifact);
+    margin-top: var(--spacing-1);
+}
+
+.phase-card-archaeological {
+    background: var(--bg-discovery);
+    border-radius: var(--radius-xl);
+    border-left: 4px solid var(--archaeological-warning);
+    margin: var(--spacing-4) 0;
+    transition: all 0.3s ease;
+}
+
+.phase-card-archaeological:hover {
+    background: var(--bg-analysis);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-discovery);
+}
+
+.phase-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: var(--spacing-3);
+}
+
+.phase-content p {
+    margin-bottom: var(--spacing-2);
+    color: var(--text-discovery);
+    line-height: 1.6;
+}
+
+.narrative-script {
+    background: var(--bg-excavation);
+    padding: var(--spacing-4);
+    border-radius: var(--radius-lg);
+    margin-top: var(--spacing-3);
+    font-style: italic;
+    border-left: 3px solid var(--archaeological-primary);
+}
+
+/* Visceral Analysis Specific */
+.visceral-content-archaeological {
+    background: linear-gradient(145deg, var(--bg-artifact), var(--bg-discovery));
+    border-radius: var(--radius-2xl);
+    padding: var(--spacing-8);
+    margin: var(--spacing-6) 0;
+    border: 1px solid var(--bg-analysis);
+}
+
+.psychological-tabs-archaeological {
+    margin: var(--spacing-6) 0;
+}
+
+.visceral-tabs-archaeological .tab-navigation-archaeological {
+    display: flex;
+    gap: var(--spacing-2);
+    margin-bottom: var(--spacing-6);
+    background: var(--bg-excavation);
+    padding: var(--spacing-2);
+    border-radius: var(--radius-lg);
+}
+
+.visceral-tabs-archaeological .tab-button-archaeological {
+    flex: 1;
+    padding: var(--spacing-3);
+    background: transparent;
+    color: var(--text-artifact);
+    border: none;
+    border-radius: var(--radius-md);
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-size: var(--font-size-sm);
+}
+
+.visceral-tabs-archaeological .tab-button-archaeological.active {
+    background: var(--archaeological-primary);
+    color: white;
+    box-shadow: var(--shadow-excavation);
+}
+
+.visceral-tabs-archaeological .tab-button-archaeological:hover:not(.active) {
+    background: var(--bg-artifact);
+    color: var(--text-discovery);
+}
+
+/* Expandable Sections */
+.expandable-archaeological {
+    border: 1px solid var(--bg-analysis);
+    border-radius: 1rem;
+    margin: 1rem 0;
+    overflow: hidden;
+}
+
+.expandable-header-archaeological {
+    background: var(--bg-discovery);
+    padding: 1rem 1.5rem;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: all 0.3s ease;
+}
+
+.expandable-header-archaeological:hover {
+    background: var(--bg-analysis);
+}
+
+.expandable-title-archaeological {
+    font-weight: 600;
+    color: var(--text-archaeological);
+}
+
+.expandable-icon-archaeological {
+    color: var(--archaeological-primary);
+    transition: transform 0.3s ease;
+}
+
+.expandable-archaeological.open .expandable-icon-archaeological {
+    transform: rotate(180deg);
+}
+
+.expandable-content-archaeological {
+    padding: 1.5rem;
+    background: var(--bg-excavation);
+    display: none;
+}
+
+.expandable-archaeological.open .expandable-content-archaeological {
+    display: block;
+    animation: fadeInArchaeological 0.3s ease-out;
+}
+
+/* Utility Classes */
+.text-archaeological-primary { color: var(--archaeological-primary); }
+.text-archaeological-secondary { color: var(--archaeological-secondary); }
+.text-archaeological-accent { color: var(--archaeological-accent); }
+.text-archaeological-warning { color: var(--archaeological-warning); }
+.text-archaeological-danger { color: var(--archaeological-danger); }
+
+.bg-archaeological-primary { background: var(--archaeological-primary); }
+.bg-archaeological-secondary { background: var(--archaeological-secondary); }
+.bg-archaeological-accent { background: var(--archaeological-accent); }
+
+.border-archaeological-primary { border-color: var(--archaeological-primary); }
+.border-archaeological-secondary { border-color: var(--archaeological-secondary); }
+.border-archaeological-accent { border-color: var(--archaeological-accent); }
+
+/* Print Styles */
+@media print {
+    .archaeological-section {
+        box-shadow: none;
+        border: 1px solid #333;
+        break-inside: avoid;
+    }
+    
+    .agent-card-archaeological,
+    .driver-card-archaeological,
+    .provi-card-archaeological {
+        break-inside: avoid;
+        margin-bottom: 1rem;
+    }
+    
+    .tab-navigation-archaeological {
+        display: none;
+    }
+    
+    .tab-content-archaeological {
+        display: block !important;
+    }
+}

@@ -1,0 +1,1002 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ARQV30 Enhanced v2.0 - Análise Forense</title>
+    
+    <!-- CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/enhanced_ui.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/archaeological_ui.css') }}">
+    
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🔬</text></svg>">
+</head>
+<body>
+    <!-- Enhanced Header -->
+    <header class="enhanced-header">
+        <div class="header-content">
+            <div class="logo-enhanced">
+                <div class="logo-icon">
+                    🔬
+                </div>
+                <div class="logo-text">
+                    <h1>ARQV30 Forense</h1>
+                    <div class="version">v2.0 - Análise Forense Completa</div>
+                </div>
+            </div>
+            
+            <div class="header-status">
+                <div style="display: flex; gap: var(--space-4); align-items: center;">
+                    <a href="/" class="btn-secondary-enhanced" style="text-decoration: none; font-size: 0.875rem; padding: var(--space-2) var(--space-4);">
+                        <i class="fas fa-home"></i>
+                        Início
+                    </a>
+                    <a href="/archaeological" class="btn-secondary-enhanced" style="text-decoration: none; font-size: 0.875rem; padding: var(--space-2) var(--space-4);">
+                        <i class="fas fa-brain"></i>
+                        Arqueológica
+                    </a>
+                </div>
+                <div class="status-enhanced status-online">
+                    <div class="status-dot"></div>
+                    <span>Sistema Forense Ativo</span>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main style="min-height: 100vh; padding: var(--space-8) 0;">
+        <div style="max-width: 1400px; margin: 0 auto; padding: 0 var(--space-6);">
+            
+            <!-- Hero Section -->
+            <section style="text-align: center; margin-bottom: var(--space-16); padding: var(--space-12) 0;">
+                <h1 style="font-size: 3.5rem; font-weight: 900; margin-bottom: var(--space-6); background: linear-gradient(135deg, var(--primary-400), var(--accent-secondary)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">
+                    Análise Forense Completa
+                </h1>
+                <p style="font-size: 1.25rem; color: var(--text-secondary); margin-bottom: var(--space-8); max-width: 800px; margin-left: auto; margin-right: auto;">
+                    Três agentes especializados para análise forense ultra-profunda
+                </p>
+            </section>
+
+            <!-- Forensic Modules Tabs -->
+            <section style="margin-bottom: var(--space-16);">
+                <div class="tabs-enhanced">
+                    <div class="tab-list-enhanced">
+                        <button class="tab-enhanced active" onclick="switchForensicTab('cpl')">
+                            <i class="fas fa-microscope"></i>
+                            Análise Forense de CPL
+                        </button>
+                        <button class="tab-enhanced" onclick="switchForensicTab('leads')">
+                            <i class="fas fa-brain"></i>
+                            Engenharia Reversa de Leads
+                        </button>
+                        <button class="tab-enhanced" onclick="switchForensicTab('prepitch')">
+                            <i class="fas fa-theater-masks"></i>
+                            Arquiteto do Pré-Pitch
+                        </button>
+                    </div>
+                </div>
+
+                <!-- CPL Forensic Analysis Tab -->
+                <div id="cpl-tab" class="tab-content-forensic active">
+                    <div class="enhanced-form-container">
+                        <div class="section-header">
+                            <div class="section-icon">
+                                <i class="fas fa-microscope"></i>
+                            </div>
+                            <div>
+                                <h3 class="section-title">ARQUEÓLOGO MESTRE DA PERSUASÃO</h3>
+                                <p class="section-subtitle">Análise forense completa de CPL para extrair DNA da conversão</p>
+                            </div>
+                        </div>
+
+                        <form id="cplForensicForm">
+                            <!-- Upload de Conteúdo -->
+                            <div class="form-section">
+                                <h4 style="color: var(--accent-primary); margin-bottom: var(--space-4);">📁 Upload de Conteúdo</h4>
+                                
+                                <div class="input-group-enhanced">
+                                    <label class="input-label-enhanced">Arquivo de Vídeo/Áudio ou Link</label>
+                                    <div style="display: grid; grid-template-columns: 1fr auto; gap: var(--space-3);">
+                                        <input type="url" name="content_link" class="input-enhanced" 
+                                               placeholder="https://youtube.com/watch?v=... ou https://vimeo.com/...">
+                                        <button type="button" class="btn-secondary-enhanced" onclick="uploadCPLFile()">
+                                            <i class="fas fa-upload"></i> Upload
+                                        </button>
+                                    </div>
+                                    <input type="file" id="cplFileInput" style="display: none;" 
+                                           accept=".mp4,.mp3,.wav,.m4a,.avi,.mov,.txt,.pdf">
+                                </div>
+                            </div>
+
+                            <!-- Transcrição -->
+                            <div class="form-section">
+                                <h4 style="color: var(--accent-primary); margin-bottom: var(--space-4);">📝 Transcrição Completa</h4>
+                                
+                                <div class="input-group-enhanced">
+                                    <label class="input-label-enhanced">Transcrição do CPL *</label>
+                                    <textarea name="transcription" class="input-enhanced textarea-enhanced" 
+                                              rows="12" required
+                                              placeholder="Cole aqui a transcrição completa do CPL para análise forense ultra-detalhada..."></textarea>
+                                    <div class="alert-enhanced alert-info mt-2">
+                                        <i class="fas fa-info-circle"></i>
+                                        <div>
+                                            <strong>Análise Forense em 12 Camadas</strong>
+                                            <p>O Arqueólogo Mestre analisará cada palavra para extrair o DNA completo da conversão.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Contextos Opcionais -->
+                            <div class="form-section">
+                                <h4 style="color: var(--accent-primary); margin-bottom: var(--space-4);">🎯 Contextos Estratégicos</h4>
+                                
+                                <div class="grid-enhanced grid-3">
+                                    <div class="input-group-enhanced">
+                                        <label class="input-label-enhanced">Contexto Estratégico</label>
+                                        <select name="contexto_estrategico" class="input-enhanced">
+                                            <option value="">Selecione...</option>
+                                            <option value="Primeiro contato">Primeiro contato</option>
+                                            <option value="Pós-aquecimento">Pós-aquecimento</option>
+                                            <option value="Relançamento">Relançamento</option>
+                                        </select>
+                                    </div>
+                                    
+                                    <div class="input-group-enhanced">
+                                        <label class="input-label-enhanced">Objetivo do CPL</label>
+                                        <select name="objetivo_cpl" class="input-enhanced">
+                                            <option value="">Selecione...</option>
+                                            <option value="Educar">Educar</option>
+                                            <option value="Qualificar">Qualificar</option>
+                                            <option value="Converter">Converter</option>
+                                        </select>
+                                    </div>
+                                    
+                                    <div class="input-group-enhanced">
+                                        <label class="input-label-enhanced">Formato</label>
+                                        <select name="formato" class="input-enhanced">
+                                            <option value="">Selecione...</option>
+                                            <option value="Ao vivo">Ao vivo</option>
+                                            <option value="Gravado">Gravado</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                
+                                <div class="grid-enhanced grid-3">
+                                    <div class="input-group-enhanced">
+                                        <label class="input-label-enhanced">Temperatura da Audiência</label>
+                                        <select name="temperatura_audiencia" class="input-enhanced">
+                                            <option value="">Selecione...</option>
+                                            <option value="Fria">Fria</option>
+                                            <option value="Morna">Morna</option>
+                                            <option value="Quente">Quente</option>
+                                        </select>
+                                    </div>
+                                    
+                                    <div class="input-group-enhanced">
+                                        <label class="input-label-enhanced">Tamanho da Audiência</label>
+                                        <select name="tamanho_audiencia" class="input-enhanced">
+                                            <option value="">Selecione...</option>
+                                            <option value="Pequena (< 100)">Pequena (< 100)</option>
+                                            <option value="Média (100-1000)">Média (100-1000)</option>
+                                            <option value="Grande (> 1000)">Grande (> 1000)</option>
+                                        </select>
+                                    </div>
+                                    
+                                    <div class="input-group-enhanced">
+                                        <label class="input-label-enhanced">Origem da Audiência</label>
+                                        <select name="origem_audiencia" class="input-enhanced">
+                                            <option value="">Selecione...</option>
+                                            <option value="Tráfego Pago">Tráfego Pago</option>
+                                            <option value="Orgânico">Orgânico</option>
+                                            <option value="Lista Própria">Lista Própria</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                
+                                <div class="grid-enhanced grid-2">
+                                    <div class="input-group-enhanced">
+                                        <label class="input-label-enhanced">Nível de Consciência</label>
+                                        <select name="nivel_consciencia" class="input-enhanced">
+                                            <option value="">Selecione...</option>
+                                            <option value="Sabe do problema">Sabe do problema</option>
+                                            <option value="Sabe da solução">Sabe da solução</option>
+                                        </select>
+                                    </div>
+                                    
+                                    <div class="input-group-enhanced">
+                                        <label class="input-label-enhanced">Novidade do Produto</label>
+                                        <select name="novidade_produto" class="input-enhanced">
+                                            <option value="">Selecione...</option>
+                                            <option value="Primeira vez">Primeira vez</option>
+                                            <option value="Já testado">Já testado</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                
+                                <div class="input-group-enhanced">
+                                    <label class="input-label-enhanced">Sequência (O que aconteceu antes e depois?)</label>
+                                    <textarea name="sequencia" class="input-enhanced textarea-enhanced" rows="3"
+                                              placeholder="Descreva o que aconteceu antes e depois deste CPL..."></textarea>
+                                </div>
+                                
+                                <div class="input-group-enhanced">
+                                    <label class="input-label-enhanced">Preço e Categoria do Produto</label>
+                                    <input type="text" name="produto_preco" class="input-enhanced"
+                                           placeholder="Ex: R$ 997, Infoproduto">
+                                </div>
+                            </div>
+
+                            <!-- Submit Button -->
+                            <div style="text-align: center; padding-top: var(--space-8);">
+                                <button type="submit" class="btn-primary-enhanced" style="font-size: 1.125rem; padding: var(--space-5) var(--space-10);">
+                                    <i class="fas fa-microscope"></i>
+                                    <span>Iniciar Análise Forense Completa</span>
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+                <!-- Leads Engineering Tab -->
+                <div id="leads-tab" class="tab-content-forensic">
+                    <div class="enhanced-form-container">
+                        <div class="section-header">
+                            <div class="section-icon">
+                                <i class="fas fa-brain"></i>
+                            </div>
+                            <div>
+                                <h3 class="section-title">MESTRE DA PERSUASÃO VISCERAL</h3>
+                                <p class="section-subtitle">Engenharia reversa psicológica profunda de leads</p>
+                            </div>
+                        </div>
+
+                        <form id="leadsEngineeringForm">
+                            <!-- Upload de Dados -->
+                            <div class="form-section">
+                                <h4 style="color: var(--accent-secondary); margin-bottom: var(--space-4);">📊 Upload de Dados</h4>
+                                
+                                <div class="input-group-enhanced">
+                                    <label class="input-label-enhanced">Arquivo de Dados dos Leads</label>
+                                    <div style="display: flex; gap: var(--space-3);">
+                                        <button type="button" class="btn-secondary-enhanced" onclick="uploadLeadsFile()">
+                                            <i class="fas fa-upload"></i> Upload CSV/XLSX
+                                        </button>
+                                        <span style="color: var(--text-muted); align-self: center;">ou cole os dados abaixo</span>
+                                    </div>
+                                    <input type="file" id="leadsFileInput" style="display: none;" 
+                                           accept=".csv,.xlsx,.xls,.txt,.json">
+                                </div>
+                                
+                                <div class="input-group-enhanced">
+                                    <label class="input-label-enhanced">Dados dos Leads *</label>
+                                    <textarea name="leads_data" class="input-enhanced textarea-enhanced" 
+                                              rows="10" required
+                                              placeholder="Cole aqui os dados da pesquisa de leads (CSV, JSON, ou texto livre)..."></textarea>
+                                    <div class="alert-enhanced alert-warning mt-2">
+                                        <i class="fas fa-exclamation-triangle"></i>
+                                        <div>
+                                            <strong>Engenharia Reversa Psicológica</strong>
+                                            <p>O Mestre Visceral analisará cada resposta para mapear a alma dos leads.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Contexto da Pesquisa -->
+                            <div class="form-section">
+                                <h4 style="color: var(--accent-secondary); margin-bottom: var(--space-4);">🎯 Contexto da Pesquisa</h4>
+                                
+                                <div class="input-group-enhanced">
+                                    <label class="input-label-enhanced">Produto/Serviço Principal *</label>
+                                    <input type="text" name="produto_servico" class="input-enhanced" required
+                                           placeholder="Para qual produto/serviço a pesquisa foi realizada?">
+                                </div>
+                                
+                                <div class="input-group-enhanced">
+                                    <label class="input-label-enhanced">Principais Perguntas da Pesquisa *</label>
+                                    <textarea name="principais_perguntas" class="input-enhanced textarea-enhanced" 
+                                              rows="4" required
+                                              placeholder="Liste as principais perguntas feitas na pesquisa..."></textarea>
+                                </div>
+                                
+                                <div class="grid-enhanced grid-2">
+                                    <div class="input-group-enhanced">
+                                        <label class="input-label-enhanced">Número de Respostas</label>
+                                        <input type="number" name="numero_respostas" class="input-enhanced"
+                                               placeholder="Quantidade de respostas coletadas">
+                                    </div>
+                                    
+                                    <div class="input-group-enhanced">
+                                        <label class="input-label-enhanced">Informações Demográficas</label>
+                                        <textarea name="informacoes_demograficas" class="input-enhanced textarea-enhanced" 
+                                                  rows="3"
+                                                  placeholder="Idade, gênero, localização, etc. (opcional)"></textarea>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Submit Button -->
+                            <div style="text-align: center; padding-top: var(--space-8);">
+                                <button type="submit" class="btn-primary-enhanced" style="font-size: 1.125rem; padding: var(--space-5) var(--space-10); background: linear-gradient(135deg, var(--accent-secondary), #7c3aed);">
+                                    <i class="fas fa-brain"></i>
+                                    <span>Iniciar Engenharia Reversa Psicológica</span>
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+                <!-- Pre-Pitch Architect Tab -->
+                <div id="prepitch-tab" class="tab-content-forensic">
+                    <div class="enhanced-form-container">
+                        <div class="section-header">
+                            <div class="section-icon">
+                                <i class="fas fa-theater-masks"></i>
+                            </div>
+                            <div>
+                                <h3 class="section-title">MESTRE DO PRÉ-PITCH INVISÍVEL</h3>
+                                <p class="section-subtitle">Orquestração de sinfonia de tensão psicológica</p>
+                            </div>
+                        </div>
+
+                        <form id="prePitchForm">
+                            <!-- Seleção de Drivers -->
+                            <div class="form-section">
+                                <h4 style="color: var(--accent-warning); margin-bottom: var(--space-4);">⚙️ Seleção de Drivers Mentais</h4>
+                                
+                                <div class="input-group-enhanced">
+                                    <label class="input-label-enhanced">Drivers Mentais Disponíveis</label>
+                                    <div id="driversSelection" class="drivers-grid-selection">
+                                        <!-- Será preenchido dinamicamente -->
+                                    </div>
+                                    <button type="button" class="btn-secondary-enhanced mt-2" onclick="loadAvailableDrivers()">
+                                        <i class="fas fa-refresh"></i> Carregar Drivers
+                                    </button>
+                                </div>
+                            </div>
+
+                            <!-- Seleção de Avatar -->
+                            <div class="form-section">
+                                <h4 style="color: var(--accent-warning); margin-bottom: var(--space-4);">👤 Seleção de Avatar</h4>
+                                
+                                <div class="input-group-enhanced">
+                                    <label class="input-label-enhanced">Avatar Alvo</label>
+                                    <select name="avatar_id" class="input-enhanced" id="avatarSelection">
+                                        <option value="">Carregando avatares...</option>
+                                    </select>
+                                    <button type="button" class="btn-secondary-enhanced mt-2" onclick="loadAvailableAvatars()">
+                                        <i class="fas fa-refresh"></i> Carregar Avatares
+                                    </button>
+                                </div>
+                                
+                                <div id="avatarPreview" class="card-enhanced mt-4" style="display: none;">
+                                    <!-- Preview do avatar selecionado -->
+                                </div>
+                            </div>
+
+                            <!-- Estrutura do Evento -->
+                            <div class="form-section">
+                                <h4 style="color: var(--accent-warning); margin-bottom: var(--space-4);">🎪 Estrutura do Evento</h4>
+                                
+                                <div class="input-group-enhanced">
+                                    <label class="input-label-enhanced">Estrutura do Evento/Lançamento *</label>
+                                    <textarea name="event_structure" class="input-enhanced textarea-enhanced" 
+                                              rows="6" required
+                                              placeholder="Descreva a estrutura completa do evento ou lançamento onde o pré-pitch será usado..."></textarea>
+                                </div>
+                            </div>
+
+                            <!-- Produto e Oferta -->
+                            <div class="form-section">
+                                <h4 style="color: var(--accent-warning); margin-bottom: var(--space-4);">🎁 Produto e Oferta</h4>
+                                
+                                <div class="input-group-enhanced">
+                                    <label class="input-label-enhanced">Detalhes do Produto e Oferta *</label>
+                                    <textarea name="product_offer" class="input-enhanced textarea-enhanced" 
+                                              rows="6" required
+                                              placeholder="Detalhe completamente o produto, preço, bônus, garantias e toda a oferta..."></textarea>
+                                </div>
+                            </div>
+
+                            <!-- Submit Button -->
+                            <div style="text-align: center; padding-top: var(--space-8);">
+                                <button type="submit" class="btn-primary-enhanced" style="font-size: 1.125rem; padding: var(--space-5) var(--space-10); background: linear-gradient(135deg, var(--accent-warning), #d97706);">
+                                    <i class="fas fa-theater-masks"></i>
+                                    <span>Orquestrar Sinfonia Psicológica</span>
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Results Area -->
+            <section id="forensicResultsArea" style="display: none;">
+                <!-- Será preenchido dinamicamente -->
+            </section>
+        </div>
+    </main>
+
+    <!-- Scripts -->
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/forensic_analysis.js') }}"></script>
+    
+    <script>
+        // Inicialização
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('🔬 Interface Forense carregada');
+            
+            // Carrega drivers e avatares automaticamente
+            loadAvailableDrivers();
+            loadAvailableAvatars();
+            
+            // Setup dos formulários
+            setupForensicForms();
+        });
+        
+        function switchForensicTab(tabName) {
+            // Remove active de todas as tabs
+            document.querySelectorAll('.tab-enhanced').forEach(tab => tab.classList.remove('active'));
+            document.querySelectorAll('.tab-content-forensic').forEach(content => content.classList.remove('active'));
+            
+            // Ativa tab selecionada
+            event.target.classList.add('active');
+            document.getElementById(`${tabName}-tab`).classList.add('active');
+        }
+        
+        function setupForensicForms() {
+            // CPL Form
+            document.getElementById('cplForensicForm').addEventListener('submit', async (e) => {
+                e.preventDefault();
+                await analyzeCPLForensic();
+            });
+            
+            // Leads Form
+            document.getElementById('leadsEngineeringForm').addEventListener('submit', async (e) => {
+                e.preventDefault();
+                await reverseEngineerLeads();
+            });
+            
+            // Pre-Pitch Form
+            document.getElementById('prePitchForm').addEventListener('submit', async (e) => {
+                e.preventDefault();
+                await orchestratePrePitch();
+            });
+        }
+        
+        async function analyzeCPLForensic() {
+            const formData = new FormData(document.getElementById('cplForensicForm'));
+            const data = Object.fromEntries(formData.entries());
+            
+            if (!data.transcription || data.transcription.length < 500) {
+                showAlert('Transcrição deve ter pelo menos 500 caracteres', 'error');
+                return;
+            }
+            
+            try {
+                showLoading('🔬 Arqueólogo Mestre analisando CPL...');
+                
+                const response = await fetch('/api/forensic/analyze_cpl_forensic', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(data)
+                });
+                
+                const result = await response.json();
+                
+                if (response.ok) {
+                    displayForensicResults(result, 'cpl');
+                    showAlert('Análise forense concluída!', 'success');
+                } else {
+                    throw new Error(result.message || result.error);
+                }
+                
+            } catch (error) {
+                console.error('Erro na análise forense:', error);
+                showAlert(`Erro: ${error.message}`, 'error');
+            } finally {
+                hideLoading();
+            }
+        }
+        
+        async function reverseEngineerLeads() {
+            const formData = new FormData(document.getElementById('leadsEngineeringForm'));
+            const data = Object.fromEntries(formData.entries());
+            
+            if (!data.leads_data || data.leads_data.length < 200) {
+                showAlert('Dados de leads devem ter pelo menos 200 caracteres', 'error');
+                return;
+            }
+            
+            try {
+                showLoading('🧠 Mestre Visceral executando engenharia reversa...');
+                
+                const response = await fetch('/api/forensic/reverse_engineer_leads', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(data)
+                });
+                
+                const result = await response.json();
+                
+                if (response.ok) {
+                    displayForensicResults(result, 'leads');
+                    showAlert('Engenharia reversa concluída!', 'success');
+                } else {
+                    throw new Error(result.message || result.error);
+                }
+                
+            } catch (error) {
+                console.error('Erro na engenharia reversa:', error);
+                showAlert(`Erro: ${error.message}`, 'error');
+            } finally {
+                hideLoading();
+            }
+        }
+        
+        async function orchestratePrePitch() {
+            const formData = new FormData(document.getElementById('prePitchForm'));
+            const data = Object.fromEntries(formData.entries());
+            
+            // Coleta drivers selecionados
+            const selectedDrivers = [];
+            document.querySelectorAll('.driver-checkbox:checked').forEach(checkbox => {
+                const driverCard = checkbox.closest('.driver-card-selection');
+                selectedDrivers.push({
+                    id: checkbox.value,
+                    nome: driverCard.querySelector('.driver-name').textContent,
+                    categoria: driverCard.querySelector('.driver-category').textContent
+                });
+            });
+            
+            if (selectedDrivers.length === 0) {
+                showAlert('Selecione pelo menos um driver mental', 'error');
+                return;
+            }
+            
+            data.selected_drivers = selectedDrivers;
+            
+            // Obtém dados do avatar selecionado
+            const avatarId = data.avatar_id;
+            if (!avatarId) {
+                showAlert('Selecione um avatar', 'error');
+                return;
+            }
+            
+            try {
+                showLoading('🎯 Mestre do Pré-Pitch orquestrando sinfonia...');
+                
+                // Busca dados do avatar
+                const avatarResponse = await fetch(`/api/forensic/get_avatar_data/${avatarId}`);
+                const avatarResult = await avatarResponse.json();
+                
+                if (!avatarResponse.ok) {
+                    throw new Error('Erro ao carregar dados do avatar');
+                }
+                
+                data.avatar_data = avatarResult.avatar_data;
+                
+                const response = await fetch('/api/forensic/orchestrate_pre_pitch', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(data)
+                });
+                
+                const result = await response.json();
+                
+                if (response.ok) {
+                    displayForensicResults(result, 'prepitch');
+                    showAlert('Orquestração concluída!', 'success');
+                } else {
+                    throw new Error(result.message || result.error);
+                }
+                
+            } catch (error) {
+                console.error('Erro na orquestração:', error);
+                showAlert(`Erro: ${error.message}`, 'error');
+            } finally {
+                hideLoading();
+            }
+        }
+        
+        function displayForensicResults(results, type) {
+            const resultsArea = document.getElementById('forensicResultsArea');
+            resultsArea.style.display = 'block';
+            
+            let html = '';
+            
+            if (type === 'cpl') {
+                html = generateCPLForensicHTML(results);
+            } else if (type === 'leads') {
+                html = generateLeadsViscerealHTML(results);
+            } else if (type === 'prepitch') {
+                html = generatePrePitchHTML(results);
+            }
+            
+            resultsArea.innerHTML = html;
+            
+            // Scroll para resultados
+            resultsArea.scrollIntoView({ behavior: 'smooth' });
+        }
+        
+        function generateCPLForensicHTML(results) {
+            return `
+                <div class="results-enhanced">
+                    <div class="results-header-enhanced">
+                        <h3>
+                            <i class="fas fa-microscope"></i>
+                            Análise Forense Completa - CPL
+                        </h3>
+                        <div class="results-actions-enhanced">
+                            <button class="btn-secondary-enhanced" onclick="downloadForensicPDF('cpl', ${JSON.stringify(results).replace(/"/g, '&quot;')})">
+                                <i class="fas fa-file-pdf"></i> Relatório PDF
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <div class="results-content-enhanced">
+                        ${generateForensicSections(results)}
+                    </div>
+                </div>
+            `;
+        }
+        
+        function generateLeadsViscerealHTML(results) {
+            return `
+                <div class="results-enhanced">
+                    <div class="results-header-enhanced">
+                        <h3>
+                            <i class="fas fa-brain"></i>
+                            Dossiê Confidencial - Engenharia Reversa
+                        </h3>
+                        <div class="results-actions-enhanced">
+                            <button class="btn-secondary-enhanced" onclick="downloadForensicPDF('leads', ${JSON.stringify(results).replace(/"/g, '&quot;')})">
+                                <i class="fas fa-file-pdf"></i> Dossiê PDF
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <div class="results-content-enhanced">
+                        ${generateViscerealSections(results)}
+                    </div>
+                </div>
+            `;
+        }
+        
+        function generatePrePitchHTML(results) {
+            return `
+                <div class="results-enhanced">
+                    <div class="results-header-enhanced">
+                        <h3>
+                            <i class="fas fa-theater-masks"></i>
+                            Sinfonia Psicológica - Pré-Pitch Invisível
+                        </h3>
+                        <div class="results-actions-enhanced">
+                            <button class="btn-secondary-enhanced" onclick="downloadForensicPDF('prepitch', ${JSON.stringify(results).replace(/"/g, '&quot;')})">
+                                <i class="fas fa-file-pdf"></i> Roteiro PDF
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <div class="results-content-enhanced">
+                        ${generatePrePitchSections(results)}
+                    </div>
+                </div>
+            `;
+        }
+        
+        function generateForensicSections(results) {
+            let html = '';
+            
+            // DNA da Conversão
+            if (results.dna_conversao_completo) {
+                html += `
+                    <div class="card-enhanced">
+                        <div class="card-header-enhanced">
+                            <div class="card-icon-enhanced">
+                                <i class="fas fa-dna"></i>
+                            </div>
+                            <h4 class="card-title-enhanced">🧬 DNA da Conversão Extraído</h4>
+                        </div>
+                        <div class="card-content">
+                            <p><strong>Fórmula Estrutural:</strong> ${results.dna_conversao_completo.formula_estrutural || 'N/A'}</p>
+                            <div class="mt-4">
+                                <strong>Sequência de Gatilhos:</strong>
+                                <ul class="list-enhanced">
+                                    ${(results.dna_conversao_completo.sequencia_gatilhos || []).map(gatilho => `
+                                        <li class="list-item-enhanced">
+                                            <i class="fas fa-arrow-right list-icon-enhanced"></i>
+                                            <span class="list-content-enhanced">${gatilho}</span>
+                                        </li>
+                                    `).join('')}
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            }
+            
+            // Métricas Forenses
+            if (results.analise_linguistica_quantitativa) {
+                const metrics = results.analise_linguistica_quantitativa;
+                html += `
+                    <div class="card-enhanced">
+                        <div class="card-header-enhanced">
+                            <div class="card-icon-enhanced">
+                                <i class="fas fa-chart-bar"></i>
+                            </div>
+                            <h4 class="card-title-enhanced">📊 Métricas Forenses Objetivas</h4>
+                        </div>
+                        <div class="metrics-enhanced">
+                            <div class="metric-card-enhanced">
+                                <div class="metric-value-enhanced">${metrics.ratio_eu_voce?.percentual_eu || 0}%</div>
+                                <div class="metric-label-enhanced">Foco em EU</div>
+                            </div>
+                            <div class="metric-card-enhanced">
+                                <div class="metric-value-enhanced">${metrics.ratio_eu_voce?.percentual_voce || 0}%</div>
+                                <div class="metric-label-enhanced">Foco em VOCÊ</div>
+                            </div>
+                            <div class="metric-card-enhanced">
+                                <div class="metric-value-enhanced">${metrics.promessas_vs_provas?.total_promessas || 0}</div>
+                                <div class="metric-label-enhanced">Promessas</div>
+                            </div>
+                            <div class="metric-card-enhanced">
+                                <div class="metric-value-enhanced">${metrics.promessas_vs_provas?.total_provas || 0}</div>
+                                <div class="metric-label-enhanced">Provas</div>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            }
+            
+            return html;
+        }
+        
+        function generateViscerealSections(results) {
+            let html = '';
+            
+            // Feridas Abertas
+            if (results.feridas_abertas_secretas) {
+                html += `
+                    <div class="card-enhanced">
+                        <div class="card-header-enhanced">
+                            <div class="card-icon-enhanced" style="color: var(--accent-error);">
+                                <i class="fas fa-heart-broken"></i>
+                            </div>
+                            <h4 class="card-title-enhanced">🩸 Feridas Abertas (Inconfessáveis)</h4>
+                        </div>
+                        <div class="psychological-list-archaeological">
+                            ${results.feridas_abertas_secretas.map((dor, index) => `
+                                <div class="psychological-item-archaeological wound-item-archaeological">
+                                    <div class="psychological-number">${index + 1}</div>
+                                    <div class="psychological-text">${dor}</div>
+                                </div>
+                            `).join('')}
+                        </div>
+                    </div>
+                `;
+            }
+            
+            // Sonhos Proibidos
+            if (results.sonhos_proibidos_ardentes) {
+                html += `
+                    <div class="card-enhanced">
+                        <div class="card-header-enhanced">
+                            <div class="card-icon-enhanced" style="color: var(--accent-warning);">
+                                <i class="fas fa-fire"></i>
+                            </div>
+                            <h4 class="card-title-enhanced">🔥 Sonhos Proibidos (Ardentes)</h4>
+                        </div>
+                        <div class="psychological-list-archaeological">
+                            ${results.sonhos_proibidos_ardentes.map((desejo, index) => `
+                                <div class="psychological-item-archaeological dream-item-archaeological">
+                                    <div class="psychological-number">${index + 1}</div>
+                                    <div class="psychological-text">${desejo}</div>
+                                </div>
+                            `).join('')}
+                        </div>
+                    </div>
+                `;
+            }
+            
+            return html;
+        }
+        
+        function generatePrePitchSections(results) {
+            let html = '';
+            
+            // Orquestração Emocional
+            if (results.orquestracao_emocional) {
+                html += `
+                    <div class="card-enhanced">
+                        <div class="card-header-enhanced">
+                            <div class="card-icon-enhanced">
+                                <i class="fas fa-music"></i>
+                            </div>
+                            <h4 class="card-title-enhanced">🎼 Orquestração Emocional</h4>
+                        </div>
+                        <div class="card-content">
+                            ${(results.orquestracao_emocional.sequencia_psicologica || []).map(fase => `
+                                <div class="phase-card" style="background: var(--bg-surface); padding: var(--space-4); border-radius: var(--radius-lg); margin: var(--space-3) 0; border-left: 4px solid var(--accent-warning);">
+                                    <h5 style="color: var(--accent-warning); margin-bottom: var(--space-2);">Fase: ${fase.fase}</h5>
+                                    <p><strong>Objetivo:</strong> ${fase.objetivo}</p>
+                                    <p><strong>Duração:</strong> ${fase.duracao}</p>
+                                    <p><strong>Resultado Esperado:</strong> ${fase.resultado_esperado}</p>
+                                </div>
+                            `).join('')}
+                        </div>
+                    </div>
+                `;
+            }
+            
+            return html;
+        }
+        
+        async function loadAvailableDrivers() {
+            try {
+                const response = await fetch('/api/forensic/get_available_drivers');
+                const result = await response.json();
+                
+                if (result.success) {
+                    const driversContainer = document.getElementById('driversSelection');
+                    driversContainer.innerHTML = result.drivers.map(driver => `
+                        <div class="driver-card-selection" style="background: var(--bg-surface); padding: var(--space-4); border-radius: var(--radius-lg); border: 1px solid var(--bg-elevated); margin: var(--space-2) 0;">
+                            <label style="display: flex; align-items: center; gap: var(--space-3); cursor: pointer;">
+                                <input type="checkbox" class="driver-checkbox" value="${driver.id}" style="margin: 0;">
+                                <div style="flex: 1;">
+                                    <div class="driver-name" style="font-weight: 600; color: var(--text-primary);">${driver.nome}</div>
+                                    <div class="driver-category" style="font-size: 0.875rem; color: var(--text-muted);">${driver.categoria} • ${driver.intensidade}</div>
+                                    <div style="font-size: 0.75rem; color: var(--text-secondary); margin-top: var(--space-1);">${driver.descricao}</div>
+                                </div>
+                            </label>
+                        </div>
+                    `).join('');
+                }
+            } catch (error) {
+                console.error('Erro ao carregar drivers:', error);
+            }
+        }
+        
+        async function loadAvailableAvatars() {
+            try {
+                const response = await fetch('/api/forensic/get_available_avatars');
+                const result = await response.json();
+                
+                if (result.success) {
+                    const avatarSelect = document.getElementById('avatarSelection');
+                    avatarSelect.innerHTML = '<option value="">Selecione um avatar...</option>' +
+                        result.avatars.map(avatar => `
+                            <option value="${avatar.id}">${avatar.nome} (${avatar.segmento})</option>
+                        `).join('');
+                    
+                    // Setup preview do avatar
+                    avatarSelect.addEventListener('change', async (e) => {
+                        if (e.target.value) {
+                            await showAvatarPreview(e.target.value);
+                        } else {
+                            document.getElementById('avatarPreview').style.display = 'none';
+                        }
+                    });
+                }
+            } catch (error) {
+                console.error('Erro ao carregar avatares:', error);
+            }
+        }
+        
+        async function showAvatarPreview(avatarId) {
+            try {
+                const response = await fetch(`/api/forensic/get_avatar_data/${avatarId}`);
+                const result = await response.json();
+                
+                if (result.success) {
+                    const preview = document.getElementById('avatarPreview');
+                    const avatarData = result.avatar_data;
+                    
+                    preview.innerHTML = `
+                        <h5 style="color: var(--accent-primary); margin-bottom: var(--space-3);">👤 ${avatarData.nome_ficticio || 'Avatar Selecionado'}</h5>
+                        <div class="grid-enhanced grid-2">
+                            <div>
+                                <strong>Principais Dores:</strong>
+                                <ul style="margin-top: var(--space-2);">
+                                    ${(avatarData.dores_viscerais || []).slice(0, 3).map(dor => `<li style="color: var(--text-secondary); font-size: 0.875rem;">${dor}</li>`).join('')}
+                                </ul>
+                            </div>
+                            <div>
+                                <strong>Principais Desejos:</strong>
+                                <ul style="margin-top: var(--space-2);">
+                                    ${(avatarData.desejos_secretos || []).slice(0, 3).map(desejo => `<li style="color: var(--text-secondary); font-size: 0.875rem;">${desejo}</li>`).join('')}
+                                </ul>
+                            </div>
+                        </div>
+                    `;
+                    preview.style.display = 'block';
+                }
+            } catch (error) {
+                console.error('Erro ao carregar preview do avatar:', error);
+            }
+        }
+        
+        function uploadCPLFile() {
+            document.getElementById('cplFileInput').click();
+        }
+        
+        function uploadLeadsFile() {
+            document.getElementById('leadsFileInput').click();
+        }
+        
+        async function downloadForensicPDF(type, data) {
+            try {
+                showLoading('Gerando PDF forense...');
+                
+                const response = await fetch('/api/forensic/generate_forensic_pdf', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        analysis_type: type,
+                        analysis_data: data
+                    })
+                });
+                
+                if (response.ok) {
+                    const blob = await response.blob();
+                    const url = window.URL.createObjectURL(blob);
+                    const a = document.createElement('a');
+                    a.href = url;
+                    a.download = `analise_forense_${type}_${Date.now()}.pdf`;
+                    a.click();
+                    window.URL.revokeObjectURL(url);
+                    
+                    showAlert('PDF gerado com sucesso!', 'success');
+                } else {
+                    throw new Error('Erro ao gerar PDF');
+                }
+            } catch (error) {
+                console.error('Erro ao gerar PDF:', error);
+                showAlert('Erro ao gerar PDF', 'error');
+            } finally {
+                hideLoading();
+            }
+        }
+    </script>
+
+    <style>
+        .tab-content-forensic {
+            display: none;
+        }
+        
+        .tab-content-forensic.active {
+            display: block;
+            animation: fadeIn 0.3s ease-out;
+        }
+        
+        .drivers-grid-selection {
+            max-height: 400px;
+            overflow-y: auto;
+            border: 1px solid var(--bg-elevated);
+            border-radius: var(--radius-lg);
+            padding: var(--space-4);
+        }
+        
+        .driver-card-selection:hover {
+            border-color: var(--accent-primary);
+            transform: translateX(4px);
+            transition: all 0.3s ease;
+        }
+        
+        .phase-card:hover {
+            background: var(--bg-elevated) !important;
+            transform: translateY(-2px);
+            transition: all 0.3s ease;
+        }
+    </style>
+</body>
+</html>
