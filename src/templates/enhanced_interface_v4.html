@@ -1,0 +1,1334 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ARQV30 Enhanced v4.0 - Interface com Análise de Documentos</title>
+    
+    <!-- CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --primary-color: #6366f1;
+            --secondary-color: #8b5cf6;
+            --success-color: #10b981;
+            --warning-color: #f59e0b;
+            --error-color: #ef4444;
+            --info-color: #06b6d4;
+            --document-color: #f97316;
+            
+            --bg-primary: #0f172a;
+            --bg-secondary: #1e293b;
+            --bg-card: #334155;
+            --text-primary: #f8fafc;
+            --text-secondary: #cbd5e1;
+            --border-color: #475569;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, var(--bg-primary) 0%, var(--bg-secondary) 100%);
+            color: var(--text-primary);
+            min-height: 100vh;
+        }
+        
+        .main-container {
+            max-width: 1600px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+        
+        .header {
+            text-align: center;
+            margin-bottom: 3rem;
+            padding: 2rem;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 20px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .header h1 {
+            font-size: 3rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 1rem;
+        }
+        
+        .header p {
+            font-size: 1.2rem;
+            color: var(--text-secondary);
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        
+        .workflow-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+        
+        .step-card {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 20px;
+            padding: 2rem;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .step-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+        }
+        
+        .step-card.document-step::before {
+            background: linear-gradient(90deg, var(--document-color), var(--warning-color));
+        }
+        
+        .step-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+        }
+        
+        .step-card.completed {
+            border-color: var(--success-color);
+        }
+        
+        .step-card.running {
+            border-color: var(--warning-color);
+            animation: pulse 2s infinite;
+        }
+        
+        .step-number {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: white;
+            margin-bottom: 1.5rem;
+        }
+        
+        .step-number.document-number {
+            background: linear-gradient(135deg, var(--document-color), var(--warning-color));
+        }
+        
+        .step-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: var(--text-primary);
+        }
+        
+        .step-description {
+            color: var(--text-secondary);
+            margin-bottom: 1.5rem;
+            line-height: 1.6;
+        }
+        
+        .step-features {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .feature-tag {
+            background: rgba(255, 255, 255, 0.1);
+            color: var(--text-primary);
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 500;
+        }
+        
+        .feature-tag.document-tag {
+            background: rgba(249, 115, 22, 0.2);
+            color: var(--document-color);
+        }
+        
+        .step-btn {
+            width: 100%;
+            padding: 1rem;
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            border: none;
+            border-radius: 12px;
+            font-weight: 600;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+        }
+        
+        .step-btn.document-btn {
+            background: linear-gradient(135deg, var(--document-color), var(--warning-color));
+        }
+        
+        .step-btn:hover:not(:disabled) {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(99, 102, 241, 0.3);
+        }
+        
+        .step-btn.document-btn:hover:not(:disabled) {
+            box-shadow: 0 10px 20px rgba(249, 115, 22, 0.3);
+        }
+        
+        .step-btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+        
+        .config-section {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 20px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .document-upload-section {
+            background: rgba(249, 115, 22, 0.1);
+            border-radius: 20px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            border: 1px solid rgba(249, 115, 22, 0.3);
+        }
+        
+        .upload-area {
+            border: 2px dashed rgba(249, 115, 22, 0.5);
+            border-radius: 16px;
+            padding: 3rem;
+            text-align: center;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            background: rgba(249, 115, 22, 0.05);
+        }
+        
+        .upload-area:hover {
+            border-color: var(--document-color);
+            background: rgba(249, 115, 22, 0.1);
+        }
+        
+        .upload-area.dragover {
+            border-color: var(--document-color);
+            background: rgba(249, 115, 22, 0.15);
+            transform: scale(1.02);
+        }
+        
+        .upload-icon {
+            font-size: 3rem;
+            color: var(--document-color);
+            margin-bottom: 1rem;
+        }
+        
+        .upload-text {
+            font-size: 1.2rem;
+            color: var(--text-primary);
+            margin-bottom: 0.5rem;
+        }
+        
+        .upload-subtext {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+        
+        .file-list {
+            margin-top: 2rem;
+        }
+        
+        .file-item {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 12px;
+            padding: 1rem;
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: between;
+            gap: 1rem;
+        }
+        
+        .file-info {
+            flex: 1;
+        }
+        
+        .file-name {
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+        
+        .file-details {
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+        }
+        
+        .file-remove {
+            background: var(--error-color);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            padding: 0.5rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .file-remove:hover {
+            background: #dc2626;
+        }
+        
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+        
+        .form-label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+        
+        .form-control {
+            width: 100%;
+            padding: 1rem;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 12px;
+            color: var(--text-primary);
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+        
+        .form-control:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1);
+        }
+        
+        .form-control::placeholder {
+            color: rgba(255, 255, 255, 0.5);
+        }
+        
+        .progress-section {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 20px;
+            padding: 2rem;
+            margin: 2rem 0;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            display: none;
+        }
+        
+        .progress-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+        
+        .progress-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .progress-percentage {
+            font-size: 2rem;
+            font-weight: 800;
+            color: var(--primary-color);
+        }
+        
+        .progress-bar-container {
+            width: 100%;
+            height: 12px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 6px;
+            overflow: hidden;
+            margin-bottom: 1rem;
+        }
+        
+        .progress-bar {
+            height: 100%;
+            background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+            border-radius: 6px;
+            transition: width 0.5s ease;
+            width: 0%;
+            position: relative;
+        }
+        
+        .progress-bar::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+            animation: shimmer 2s infinite;
+        }
+        
+        .progress-status {
+            color: var(--text-secondary);
+            font-size: 1rem;
+            padding: 1rem;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 12px;
+            border-left: 4px solid var(--primary-color);
+        }
+        
+        .step-indicators {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 1rem;
+            margin: 2rem 0;
+        }
+        
+        .step-indicator {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            transition: all 0.3s ease;
+        }
+        
+        .step-indicator.active {
+            background: var(--primary-color);
+            color: white;
+            transform: scale(1.2);
+        }
+        
+        .step-indicator.completed {
+            background: var(--success-color);
+            color: white;
+        }
+        
+        .step-indicator.document-indicator {
+            background: var(--document-color);
+            color: white;
+        }
+        
+        .step-line {
+            width: 60px;
+            height: 2px;
+            background: rgba(255, 255, 255, 0.2);
+        }
+        
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin: 2rem 0;
+        }
+        
+        .stat-card {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 1.5rem;
+            border-radius: 16px;
+            text-align: center;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .stat-value {
+            font-size: 2rem;
+            font-weight: 800;
+            color: var(--primary-color);
+            margin-bottom: 0.5rem;
+        }
+        
+        .stat-label {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+        
+        .btn-group {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            margin-top: 2rem;
+            flex-wrap: wrap;
+        }
+        
+        .btn {
+            padding: 0.75rem 1.5rem;
+            border: none;
+            border-radius: 12px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+        }
+        
+        .btn-document {
+            background: linear-gradient(135deg, var(--document-color), var(--warning-color));
+            color: white;
+        }
+        
+        .btn-secondary {
+            background: rgba(255, 255, 255, 0.1);
+            color: var(--text-primary);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        .btn:hover:not(:disabled) {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+        
+        .btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+        
+        .loading-spinner {
+            width: 20px;
+            height: 20px;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            border-top-color: currentColor;
+            animation: spin 1s linear infinite;
+        }
+        
+        .notification-container {
+            position: fixed;
+            top: 1rem;
+            right: 1rem;
+            z-index: 9999;
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+            max-width: 400px;
+        }
+        
+        .notification {
+            background: rgba(255, 255, 255, 0.95);
+            color: #1f2937;
+            padding: 1rem;
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            border-left: 4px solid;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            animation: slideIn 0.3s ease;
+        }
+        
+        .notification-success { border-color: var(--success-color); }
+        .notification-warning { border-color: var(--warning-color); }
+        .notification-error { border-color: var(--error-color); }
+        .notification-info { border-color: var(--info-color); }
+        
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+        
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.7; }
+        }
+        
+        @keyframes shimmer {
+            0% { transform: translateX(-100%); }
+            100% { transform: translateX(100%); }
+        }
+        
+        @keyframes slideIn {
+            from { opacity: 0; transform: translateX(100px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+        
+        @media (max-width: 768px) {
+            .main-container {
+                padding: 1rem;
+            }
+            
+            .workflow-container {
+                grid-template-columns: 1fr;
+            }
+            
+            .header h1 {
+                font-size: 2rem;
+            }
+            
+            .btn-group {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="main-container">
+        <!-- Header -->
+        <div class="header">
+            <h1><i class="fas fa-rocket"></i> ARQV30 Enhanced v4.0</h1>
+            <p>Sistema de Análise Ultra-Detalhada com Busca Massiva Real, Análise de Documentos IA e Captura de Screenshots</p>
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-value">4</div>
+                    <div class="stat-label">Etapas de Workflow</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value">16</div>
+                    <div class="stat-label">Módulos de Análise</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value">100%</div>
+                    <div class="stat-label">Dados Reais</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value">IA</div>
+                    <div class="stat-label">Análise Documentos</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Configuração -->
+        <div class="config-section">
+            <h3><i class="fas fa-cog"></i> Configuração da Análise</h3>
+            <form id="analysisForm">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label class="form-label" for="segmento">
+                                <i class="fas fa-bullseye"></i> Segmento de Mercado *
+                            </label>
+                            <input type="text" id="segmento" name="segmento" class="form-control" 
+                                   placeholder="Ex: Tecnologia, Saúde, E-commerce..." required>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label class="form-label" for="produto">
+                                <i class="fas fa-box"></i> Produto/Serviço
+                            </label>
+                            <input type="text" id="produto" name="produto" class="form-control"
+                                   placeholder="Nome do seu produto ou serviço">
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label class="form-label" for="preco">
+                                <i class="fas fa-dollar-sign"></i> Preço (R$)
+                            </label>
+                            <input type="number" id="preco" name="preco" class="form-control" 
+                                   step="0.01" placeholder="997.00">
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label class="form-label" for="objetivo_receita">
+                                <i class="fas fa-chart-line"></i> Objetivo de Receita (R$)
+                            </label>
+                            <input type="number" id="objetivo_receita" name="objetivo_receita" 
+                                   class="form-control" step="0.01" placeholder="100000.00">
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label class="form-label" for="publico">
+                        <i class="fas fa-users"></i> Público-Alvo Detalhado
+                    </label>
+                    <textarea id="publico" name="publico" class="form-control" rows="4"
+                              placeholder="Descreva detalhadamente seu público-alvo: dores, desejos, características demográficas..."></textarea>
+                </div>
+                
+                <div class="form-group">
+                    <label class="form-label" for="contexto_adicional">
+                        <i class="fas fa-plus-circle"></i> Contexto Adicional
+                    </label>
+                    <textarea id="contexto_adicional" name="contexto_adicional" class="form-control" rows="3"
+                              placeholder="Informações adicionais relevantes para a análise..."></textarea>
+                </div>
+            </form>
+        </div>
+
+        <!-- Upload de Documentos -->
+        <div class="document-upload-section">
+            <h3><i class="fas fa-file-upload"></i> Upload de Documentos para Análise IA</h3>
+            <p class="text-secondary mb-3">Carregue documentos (JSON, MD, TXT, DOC, XLS, CSV, PNG, JPG) para análise profunda com IA</p>
+            
+            <div class="upload-area" id="uploadArea">
+                <div class="upload-icon">
+                    <i class="fas fa-cloud-upload-alt"></i>
+                </div>
+                <div class="upload-text">Arraste arquivos aqui ou clique para selecionar</div>
+                <div class="upload-subtext">Suporta: JSON, MD, TXT, DOC, DOCX, XLS, XLSX, CSV, PNG, JPG (máx. 50MB cada)</div>
+                <input type="file" id="fileInput" multiple accept=".json,.md,.txt,.doc,.docx,.xls,.xlsx,.csv,.png,.jpg,.jpeg,.pdf" style="display: none;">
+            </div>
+            
+            <div class="file-list" id="fileList" style="display: none;">
+                <h4><i class="fas fa-list"></i> Arquivos Selecionados</h4>
+                <div id="fileItems"></div>
+            </div>
+        </div>
+
+        <!-- Workflow Steps -->
+        <div class="workflow-container">
+            <!-- Etapa 0 - Análise de Documentos -->
+            <div class="step-card document-step" id="step0Card">
+                <div class="step-number document-number">0</div>
+                <h3 class="step-title">Análise de Documentos IA</h3>
+                <p class="step-description">
+                    Análise inteligente de documentos com modelos Qwen e Predictive Analytics Engine
+                </p>
+                <div class="step-features">
+                    <span class="feature-tag document-tag">🤖 Qwen 2.5-72B</span>
+                    <span class="feature-tag document-tag">📊 Predictive Analytics</span>
+                    <span class="feature-tag document-tag">🔍 Análise Profunda</span>
+                    <span class="feature-tag document-tag">📝 Insights Personalizados</span>
+                </div>
+                <button class="step-btn document-btn" id="step0Btn" onclick="startDocumentAnalysis()" disabled>
+                    <i class="fas fa-brain"></i>
+                    <span>Analisar Documentos</span>
+                </button>
+            </div>
+
+            <!-- Etapa 1 -->
+            <div class="step-card" id="step1Card">
+                <div class="step-number">1</div>
+                <h3 class="step-title">Coleta Massiva Real</h3>
+                <p class="step-description">
+                    Busca massiva com rotação de APIs, extração de conteúdo viral e captura automática de screenshots
+                </p>
+                <div class="step-features">
+                    <span class="feature-tag">🔄 Rotação de APIs</span>
+                    <span class="feature-tag">📸 Screenshots Automáticos</span>
+                    <span class="feature-tag">🔥 Conteúdo Viral</span>
+                    <span class="feature-tag">🌐 Múltiplos Provedores</span>
+                </div>
+                <button class="step-btn" id="step1Btn" onclick="startStep1()">
+                    <i class="fas fa-database"></i>
+                    <span>Iniciar Coleta Massiva</span>
+                </button>
+            </div>
+
+            <!-- Etapa 2 -->
+            <div class="step-card" id="step2Card">
+                <div class="step-number">2</div>
+                <h3 class="step-title">Síntese com IA Ativa</h3>
+                <p class="step-description">
+                    IA analisa dados coletados e documentos, realizando buscas online ativas para validar e enriquecer informações
+                </p>
+                <div class="step-features">
+                    <span class="feature-tag">🤖 IA com Ferramentas</span>
+                    <span class="feature-tag">🔍 Busca Ativa</span>
+                    <span class="feature-tag">✅ Validação Online</span>
+                    <span class="feature-tag">📊 Síntese JSON</span>
+                </div>
+                <button class="step-btn" id="step2Btn" onclick="startStep2()" disabled>
+                    <i class="fas fa-brain"></i>
+                    <span>Iniciar Síntese IA</span>
+                </button>
+            </div>
+
+            <!-- Etapa 3 -->
+            <div class="step-card" id="step3Card">
+                <div class="step-number">3</div>
+                <h3 class="step-title">Geração de 16 Módulos</h3>
+                <p class="step-description">
+                    Geração automática de 16 módulos especializados e compilação do relatório final completo
+                </p>
+                <div class="step-features">
+                    <span class="feature-tag">📝 16 Módulos</span>
+                    <span class="feature-tag">🔗 Compilação</span>
+                    <span class="feature-tag">📋 Relatório Final</span>
+                    <span class="feature-tag">📄 25+ Páginas</span>
+                </div>
+                <button class="step-btn" id="step3Btn" onclick="startStep3()" disabled>
+                    <i class="fas fa-cogs"></i>
+                    <span>Gerar Módulos</span>
+                </button>
+            </div>
+        </div>
+
+        <!-- Progress Section -->
+        <div class="progress-section" id="progressSection">
+            <div class="progress-header">
+                <div class="progress-title">
+                    <i class="fas fa-cogs fa-spin"></i>
+                    <span id="progressTitle">Workflow em Execução</span>
+                </div>
+                <div class="progress-percentage" id="progressPercentage">0%</div>
+            </div>
+            
+            <div class="progress-bar-container">
+                <div class="progress-bar" id="progressBar"></div>
+            </div>
+            
+            <div class="progress-status" id="progressStatus">
+                Iniciando workflow...
+            </div>
+            
+            <div class="step-indicators">
+                <div class="step-indicator document-indicator" id="indicator0">0</div>
+                <div class="step-line"></div>
+                <div class="step-indicator" id="indicator1">1</div>
+                <div class="step-line"></div>
+                <div class="step-indicator" id="indicator2">2</div>
+                <div class="step-line"></div>
+                <div class="step-indicator" id="indicator3">3</div>
+            </div>
+        </div>
+
+        <!-- Action Buttons -->
+        <div class="btn-group">
+            <button class="btn btn-document" id="startDocumentOnlyBtn" onclick="startDocumentOnlyWorkflow()" disabled>
+                <i class="fas fa-file-alt"></i>
+                <span>Analisar Apenas Documentos</span>
+                <div class="loading-spinner" style="display: none;"></div>
+            </button>
+            
+            <button class="btn btn-primary" id="startCompleteWorkflowBtn" onclick="startCompleteWorkflow()">
+                <i class="fas fa-play"></i>
+                <span>Executar Workflow Completo</span>
+                <div class="loading-spinner" style="display: none;"></div>
+            </button>
+            
+            <button class="btn btn-secondary" onclick="resetWorkflow()">
+                <i class="fas fa-refresh"></i>
+                <span>Resetar</span>
+            </button>
+        </div>
+    </div>
+
+    <!-- Notification Container -->
+    <div class="notification-container" id="notificationContainer"></div>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <script>
+        // Estado global do workflow
+        let currentSessionId = null;
+        let documentSessionId = null;
+        let selectedFiles = [];
+        let workflowState = {
+            step: 0,
+            status: 'idle',
+            results: {},
+            documentsAnalyzed: false
+        };
+        
+        // Inicialização
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('🚀 ARQV30 Enhanced v4.0 Interface Carregada');
+            setupEventListeners();
+            setupFileUpload();
+            loadSavedConfiguration();
+        });
+        
+        function setupEventListeners() {
+            // Auto-save configuração
+            const form = document.getElementById('analysisForm');
+            if (form) {
+                form.addEventListener('change', saveConfiguration);
+            }
+            
+            // Atalhos de teclado
+            document.addEventListener('keydown', function(e) {
+                if (e.ctrlKey && e.key === 'Enter') {
+                    e.preventDefault();
+                    startCompleteWorkflow();
+                }
+            });
+        }
+        
+        function setupFileUpload() {
+            const uploadArea = document.getElementById('uploadArea');
+            const fileInput = document.getElementById('fileInput');
+            
+            // Click para selecionar arquivos
+            uploadArea.addEventListener('click', () => {
+                fileInput.click();
+            });
+            
+            // Drag and drop
+            uploadArea.addEventListener('dragover', (e) => {
+                e.preventDefault();
+                uploadArea.classList.add('dragover');
+            });
+            
+            uploadArea.addEventListener('dragleave', () => {
+                uploadArea.classList.remove('dragover');
+            });
+            
+            uploadArea.addEventListener('drop', (e) => {
+                e.preventDefault();
+                uploadArea.classList.remove('dragover');
+                handleFiles(e.dataTransfer.files);
+            });
+            
+            // Input change
+            fileInput.addEventListener('change', (e) => {
+                handleFiles(e.target.files);
+            });
+        }
+        
+        function handleFiles(files) {
+            const allowedTypes = [
+                'application/json', 'text/markdown', 'text/plain', 
+                'application/msword', 'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
+                'application/vnd.ms-excel', 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
+                'text/csv', 'image/png', 'image/jpeg', 'application/pdf'
+            ];
+            
+            const allowedExtensions = ['json', 'md', 'txt', 'doc', 'docx', 'xls', 'xlsx', 'csv', 'png', 'jpg', 'jpeg', 'pdf'];
+            
+            for (let file of files) {
+                const extension = file.name.split('.').pop().toLowerCase();
+                
+                if (allowedExtensions.includes(extension) && file.size <= 50 * 1024 * 1024) {
+                    selectedFiles.push(file);
+                } else {
+                    showNotification(`Arquivo ${file.name} não é suportado ou é muito grande`, 'warning');
+                }
+            }
+            
+            updateFileList();
+            updateDocumentButtons();
+        }
+        
+        function updateFileList() {
+            const fileList = document.getElementById('fileList');
+            const fileItems = document.getElementById('fileItems');
+            
+            if (selectedFiles.length === 0) {
+                fileList.style.display = 'none';
+                return;
+            }
+            
+            fileList.style.display = 'block';
+            fileItems.innerHTML = '';
+            
+            selectedFiles.forEach((file, index) => {
+                const fileItem = document.createElement('div');
+                fileItem.className = 'file-item';
+                fileItem.innerHTML = `
+                    <div class="file-info">
+                        <div class="file-name">${file.name}</div>
+                        <div class="file-details">${formatFileSize(file.size)} • ${file.type || 'Tipo desconhecido'}</div>
+                    </div>
+                    <button class="file-remove" onclick="removeFile(${index})">
+                        <i class="fas fa-times"></i>
+                    </button>
+                `;
+                fileItems.appendChild(fileItem);
+            });
+        }
+        
+        function removeFile(index) {
+            selectedFiles.splice(index, 1);
+            updateFileList();
+            updateDocumentButtons();
+        }
+        
+        function updateDocumentButtons() {
+            const hasFiles = selectedFiles.length > 0;
+            document.getElementById('step0Btn').disabled = !hasFiles;
+            document.getElementById('startDocumentOnlyBtn').disabled = !hasFiles;
+        }
+        
+        async function startDocumentAnalysis() {
+            try {
+                if (selectedFiles.length === 0) {
+                    showNotification('Selecione pelo menos um arquivo para análise', 'warning');
+                    return;
+                }
+                
+                showProgress(true);
+                updateProgress(0, 'Iniciando upload de documentos...', 5);
+                updateStepCard('step0Card', 'running');
+                
+                // Upload dos arquivos
+                const formData = new FormData();
+                selectedFiles.forEach(file => {
+                    formData.append('files', file);
+                });
+                
+                const uploadResponse = await fetch('/api/document_analysis/upload', {
+                    method: 'POST',
+                    body: formData
+                });
+                
+                const uploadResult = await uploadResponse.json();
+                
+                if (!uploadResult.success) {
+                    throw new Error(uploadResult.error);
+                }
+                
+                documentSessionId = uploadResult.session_id;
+                updateProgress(0, 'Arquivos enviados, iniciando análise IA...', 20);
+                
+                // Inicia análise
+                const analysisResponse = await fetch(`/api/document_analysis/analyze/${documentSessionId}`, {
+                    method: 'POST'
+                });
+                
+                const analysisResult = await analysisResponse.json();
+                
+                if (!analysisResult.success) {
+                    throw new Error(analysisResult.error);
+                }
+                
+                showNotification('Análise de documentos iniciada com IA', 'success');
+                monitorDocumentAnalysis();
+                
+            } catch (error) {
+                console.error('Erro na análise de documentos:', error);
+                showNotification(`Erro na análise: ${error.message}`, 'error');
+                updateStepCard('step0Card', 'error');
+                showProgress(false);
+            }
+        }
+        
+        async function monitorDocumentAnalysis() {
+            const checkProgress = async () => {
+                try {
+                    const response = await fetch(`/api/document_analysis/status/${documentSessionId}`);
+                    const status = await response.json();
+                    
+                    if (status.status === 'completed') {
+                        updateProgress(0, 'Análise de documentos concluída', 100);
+                        updateStepCard('step0Card', 'completed');
+                        updateStepIndicator(0, 'completed');
+                        
+                        workflowState.documentsAnalyzed = true;
+                        
+                        showNotification('Análise de documentos concluída! IA gerou insights personalizados.', 'success');
+                        
+                        // Habilita próximas etapas
+                        document.getElementById('step1Btn').disabled = false;
+                        
+                        return;
+                    } else if (status.status === 'error') {
+                        throw new Error('Erro na análise de documentos');
+                    }
+                    
+                    // Atualiza progresso
+                    const progress = Math.min(20 + (status.progress || 0) * 0.8, 99);
+                    updateProgress(0, 'Analisando documentos com IA...', progress);
+                    
+                    setTimeout(checkProgress, 3000);
+                    
+                } catch (error) {
+                    console.error('Erro no monitoramento:', error);
+                    updateStepCard('step0Card', 'error');
+                    showNotification('Erro na análise de documentos', 'error');
+                }
+            };
+            
+            checkProgress();
+        }
+        
+        async function startDocumentOnlyWorkflow() {
+            if (selectedFiles.length === 0) {
+                showNotification('Selecione arquivos para análise', 'warning');
+                return;
+            }
+            
+            const btn = document.getElementById('startDocumentOnlyBtn');
+            btn.disabled = true;
+            btn.querySelector('.loading-spinner').style.display = 'inline-block';
+            
+            await startDocumentAnalysis();
+            
+            btn.disabled = false;
+            btn.querySelector('.loading-spinner').style.display = 'none';
+        }
+        
+        async function startStep1() {
+            try {
+                if (!validateForm()) {
+                    showNotification('Por favor, preencha pelo menos o segmento', 'warning');
+                    return;
+                }
+                
+                const formData = getFormData();
+                
+                // Inclui dados dos documentos se analisados
+                if (workflowState.documentsAnalyzed && documentSessionId) {
+                    formData.document_session_id = documentSessionId;
+                }
+                
+                showProgress(true);
+                updateProgress(1, 'Iniciando coleta massiva de dados...', 10);
+                updateStepCard('step1Card', 'running');
+                
+                const response = await fetch('/api/workflow/step1/start', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(formData)
+                });
+                
+                const result = await response.json();
+                
+                if (result.success) {
+                    currentSessionId = result.session_id;
+                    showNotification('Etapa 1 iniciada: Coleta massiva em execução', 'success');
+                    
+                    // Monitora progresso
+                    monitorStep1Progress();
+                } else {
+                    throw new Error(result.error);
+                }
+                
+            } catch (error) {
+                console.error('Erro na Etapa 1:', error);
+                showNotification(`Erro na Etapa 1: ${error.message}`, 'error');
+                updateStepCard('step1Card', 'error');
+                showProgress(false);
+            }
+        }
+        
+        async function startCompleteWorkflow() {
+            try {
+                if (!validateForm()) {
+                    showNotification('Por favor, preencha pelo menos o segmento', 'warning');
+                    return;
+                }
+                
+                const btn = document.getElementById('startCompleteWorkflowBtn');
+                btn.disabled = true;
+                btn.querySelector('.loading-spinner').style.display = 'inline-block';
+                
+                // Se há documentos, analisa primeiro
+                if (selectedFiles.length > 0 && !workflowState.documentsAnalyzed) {
+                    await startDocumentAnalysis();
+                    // Aguarda conclusão da análise de documentos
+                    await waitForDocumentAnalysis();
+                }
+                
+                // Continua com o workflow normal
+                await startStep1();
+                
+            } catch (error) {
+                console.error('Erro no workflow completo:', error);
+                showNotification(`Erro no workflow: ${error.message}`, 'error');
+                
+                const btn = document.getElementById('startCompleteWorkflowBtn');
+                btn.disabled = false;
+                btn.querySelector('.loading-spinner').style.display = 'none';
+            }
+        }
+        
+        async function waitForDocumentAnalysis() {
+            return new Promise((resolve, reject) => {
+                const checkStatus = async () => {
+                    try {
+                        const response = await fetch(`/api/document_analysis/status/${documentSessionId}`);
+                        const status = await response.json();
+                        
+                        if (status.status === 'completed') {
+                            workflowState.documentsAnalyzed = true;
+                            resolve();
+                        } else if (status.status === 'error') {
+                            reject(new Error('Erro na análise de documentos'));
+                        } else {
+                            setTimeout(checkStatus, 2000);
+                        }
+                    } catch (error) {
+                        reject(error);
+                    }
+                };
+                
+                checkStatus();
+            });
+        }
+        
+        // Funções auxiliares (mantidas do código original)
+        function getFormData() {
+            return {
+                segmento: document.getElementById('segmento').value,
+                produto: document.getElementById('produto').value,
+                preco: document.getElementById('preco').value,
+                objetivo_receita: document.getElementById('objetivo_receita').value,
+                publico: document.getElementById('publico').value,
+                contexto_adicional: document.getElementById('contexto_adicional').value
+            };
+        }
+        
+        function validateForm() {
+            const segmento = document.getElementById('segmento').value.trim();
+            return segmento.length > 0;
+        }
+        
+        function updateProgress(step, message, percentage) {
+            document.getElementById('progressTitle').innerHTML = `<i class="fas fa-cogs fa-spin"></i> ${message}`;
+            document.getElementById('progressStatus').textContent = message;
+            document.getElementById('progressPercentage').textContent = `${percentage}%`;
+            document.getElementById('progressBar').style.width = `${percentage}%`;
+            
+            updateStepIndicator(step, step >= 0 ? 'active' : 'pending');
+        }
+        
+        function updateStepCard(cardId, status) {
+            const card = document.getElementById(cardId);
+            if (card) {
+                card.className = card.className.replace(/\s(completed|running|error)/, '');
+                if (status) {
+                    card.classList.add(status);
+                }
+            }
+        }
+        
+        function updateStepIndicator(step, status) {
+            for (let i = 0; i <= 3; i++) {
+                const indicator = document.getElementById(`indicator${i}`);
+                if (indicator) {
+                    indicator.className = i === 0 ? 'step-indicator document-indicator' : 'step-indicator';
+                    
+                    if (i < step) {
+                        indicator.classList.add('completed');
+                    } else if (i === step) {
+                        indicator.classList.add(status);
+                    }
+                }
+            }
+        }
+        
+        function showProgress(show) {
+            const section = document.getElementById('progressSection');
+            if (section) {
+                section.style.display = show ? 'block' : 'none';
+            }
+        }
+        
+        function showNotification(message, type) {
+            const container = document.getElementById('notificationContainer');
+            const notification = document.createElement('div');
+            notification.className = `notification notification-${type}`;
+            notification.innerHTML = `
+                <i class="fas fa-${type === 'success' ? 'check-circle' : type === 'error' ? 'exclamation-circle' : type === 'warning' ? 'exclamation-triangle' : 'info-circle'}"></i>
+                <span>${message}</span>
+            `;
+            
+            container.appendChild(notification);
+            
+            setTimeout(() => {
+                notification.remove();
+            }, 5000);
+        }
+        
+        function formatFileSize(bytes) {
+            if (bytes === 0) return '0 Bytes';
+            const k = 1024;
+            const sizes = ['Bytes', 'KB', 'MB', 'GB'];
+            const i = Math.floor(Math.log(bytes) / Math.log(k));
+            return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + ' ' + sizes[i];
+        }
+        
+        function saveConfiguration() {
+            const config = getFormData();
+            localStorage.setItem('arqv30_config_v4', JSON.stringify(config));
+        }
+        
+        function loadSavedConfiguration() {
+            const saved = localStorage.getItem('arqv30_config_v4');
+            if (saved) {
+                try {
+                    const config = JSON.parse(saved);
+                    Object.entries(config).forEach(([key, value]) => {
+                        const element = document.getElementById(key);
+                        if (element && value) {
+                            element.value = value;
+                        }
+                    });
+                } catch (error) {
+                    console.error('Erro ao carregar configuração:', error);
+                }
+            }
+        }
+        
+        function resetWorkflow() {
+            if (confirm('Tem certeza que deseja resetar o workflow?')) {
+                currentSessionId = null;
+                documentSessionId = null;
+                selectedFiles = [];
+                workflowState = { step: 0, status: 'idle', results: {}, documentsAnalyzed: false };
+                
+                // Reset UI
+                showProgress(false);
+                updateFileList();
+                updateDocumentButtons();
+                
+                // Reset step cards
+                ['step0Card', 'step1Card', 'step2Card', 'step3Card'].forEach(cardId => {
+                    updateStepCard(cardId, '');
+                });
+                
+                // Reset buttons
+                document.getElementById('step1Btn').disabled = false;
+                document.getElementById('step2Btn').disabled = true;
+                document.getElementById('step3Btn').disabled = true;
+                document.getElementById('startCompleteWorkflowBtn').disabled = false;
+                
+                // Reset file input
+                document.getElementById('fileInput').value = '';
+                
+                showNotification('Workflow resetado', 'info');
+            }
+        }
+        
+        // Placeholder functions for step monitoring (to be implemented)
+        async function monitorStep1Progress() {
+            // Implementation similar to original code
+            console.log('Monitoring Step 1...');
+        }
+        
+        async function startStep2() {
+            console.log('Starting Step 2...');
+        }
+        
+        async function startStep3() {
+            console.log('Starting Step 3...');
+        }
+    </script>
+</body>
+</html>
+
