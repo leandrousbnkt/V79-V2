@@ -13,7 +13,7 @@ python --version >nul 2>&1
 if errorlevel 1 (
     echo ❌ ERRO: Python não encontrado!
     echo.
-    echo Por favor, instale Python 3.11+ de https://python.org
+    echo Por favor, instale Python 3.11+ de https://python.org    
     echo Certifique-se de marcar "Add Python to PATH" durante a instalação.
     echo.
     pause
@@ -64,8 +64,24 @@ if errorlevel 1 (
     exit /b 1
 )
 
-REM Instala dependências adicionais para web scraping
-echo 🔄 Instalando dependências adicionais...
+REM === MODIFICAÇÃO CRÍTICA: Instala o modelo spaCy pt_core_news_sm ===
+echo 🔄 Instalando modelo spaCy pt_core_news_sm...
+pip install src\engine\pt_core_news_sm-3.8.0-py3-none-any.whl
+if errorlevel 1 (
+    echo ⚠️ AVISO: Falha ao instalar o modelo spaCy pt_core_news_sm a partir do .whl. Tentando download...
+    python -m spacy download pt_core_news_sm
+    if errorlevel 1 (
+        echo ⚠️ AVISO: Falha ao baixar o modelo spaCy pt_core_news_sm. A análise NLP será limitada.
+    ) else (
+        echo ✅ Modelo spaCy pt_core_news_sm baixado com sucesso.
+    )
+) else (
+     echo ✅ Modelo spaCy pt_core_news_sm instalado com sucesso a partir do .whl.
+)
+REM === FIM DA MODIFICAÇÃO ===
+
+REM Instala dependências adicionais para web scraping (se não estiverem no requirements.txt principal)
+echo 🔄 Instalando dependências adicionais (se necessário)...
 pip install beautifulsoup4 lxml html5lib
 if errorlevel 1 (
     echo ⚠️ AVISO: Algumas dependências adicionais falharam.
@@ -82,7 +98,7 @@ echo.
 REM Testa a instalação
 echo 🧪 Testando instalação ULTRA-ROBUSTA...
 cd src
-python -c "import flask, requests, google.generativeai, supabase, pandas, PyPDF2; print('✅ Dependências principais OK')"
+python -c "import flask, requests, google.generativeai, supabase, pandas, PyPDF2, spacy; print('✅ Dependências principais OK')"
 if errorlevel 1 (
     echo ⚠️ AVISO: Algumas dependências podem não estar funcionando corretamente.
 ) else (
